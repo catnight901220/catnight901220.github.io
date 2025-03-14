@@ -14,6 +14,9 @@
       --text-color: #333;
       --bg-color: #f5f5f5;
       --card-bg: #ffffff;
+
+      /* 新增漸層背景色，可依喜好調整 */
+      --header-gradient: linear-gradient(135deg, #2196f3, #1976d2);
     }
 
     body {
@@ -24,6 +27,7 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
+      transition: all 0.3s ease;  /* 在切換模式時做平滑轉換 */
     }
 
     .container {
@@ -31,13 +35,15 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
     }
 
     .header {
       text-align: center;
       margin-bottom: 30px;
       padding: 20px;
-      background: linear-gradient(135deg, var(--primary-color), #1976d2);
+      background: var(--header-gradient);
       color: white;
       border-radius: 10px;
       animation: fadeIn 0.8s ease;
@@ -154,6 +160,15 @@
       border-color: var(--success-color);
       animation: correctPulse 0.4s 2;
     }
+
+    /* 顯示「真正的」正解用 */
+    .correct-answer {
+      background-color: #c8e6c9;
+      border-color: var(--success-color);
+      animation: correctPulse 0.4s 2;
+      opacity: 0.9;
+    }
+
     @keyframes correctPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
@@ -264,6 +279,13 @@
       color: var(--success-color);
     }
 
+    /* 🟢 這裡是「錯誤」狀態(答錯了，再接再厲)時，使用紅色邊框 */
+    .status-message.wrong {
+      background-color: #ffebee;
+      color: var(--error-color);
+      border: 2px solid var(--error-color);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -279,6 +301,7 @@
       border-radius: 20px;
       font-weight: bold;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 9999;
     }
 
     .modal {
@@ -364,14 +387,77 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* 🟢 Confetti Canvas：顯示在最上層以達爆裂效果 */
+    #confetti-canvas {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+    }
+
+    /********************************************
+     * 手機模式樣式：當 body 加上 .mobile-view 時生效
+     ********************************************/
+    body.mobile-view {
+      max-width: 100%;
+      padding: 10px;
+    }
+
+    body.mobile-view .container {
+      border-radius: 0;
+      padding: 10px;
+      box-shadow: none;
+    }
+
+    body.mobile-view .header {
+      border-radius: 0;
+      font-size: 1em;
+    }
+
+    body.mobile-view .stats {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    body.mobile-view .section {
+      margin: 15px 0;
+      padding: 10px;
+    }
+
+    body.mobile-view .section h2 {
+      font-size: 1.2em;
+    }
+
+    body.mobile-view .option {
+      margin: 5px 0;
+      padding: 10px;
+    }
+
+    body.mobile-view .stat-value {
+      font-size: 1.2em;
+    }
+
+    body.mobile-view h1 {
+      font-size: 1.8em;
+    }
   </style>
 </head>
 <body>
+  <!-- 🎉 用於放置五彩紙屑的畫布 -->
+  <canvas id="confetti-canvas"></canvas>
+
   <div class="timer" id="timer">時間: 00:00</div>
 
   <div class="container">
     <div class="header">
       <h1>多益考試練習系統 - 增強版</h1>
+      <div style="margin: 10px 0;">
+        <button class="secondary-button" onclick="toggleInterface()">切換介面</button>
+      </div>
       <div class="progress-bar">
         <div class="progress" id="progress"></div>
       </div>
@@ -440,7 +526,99 @@
   <!-- 先載入題庫檔案 -->
   <script src="questions.js"></script>
 
-  <!-- 再載入主邏輯程式碼 -->
+  <!-- 下面是五彩紙屑的簡易函式 (使用 canvas) -->
+  <script>
+    // 來源參考: https://www.kirilv.com/canvas-confetti/
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiActive = false;
+    let animationFrame;
+
+    function initConfetti() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+      window.addEventListener('resize', () => {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+      });
+    }
+
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createConfettiParticles() {
+      const colors = [
+        'rgba(255,99,71,',   // tomato
+        'rgba(54,162,235,',  // blue
+        'rgba(255,206,86,',  // yellow
+        'rgba(75,192,192,'   // green
+      ];
+      for (let i = 0; i < 100; i++) {
+        confettiParticles.push({
+          x: randomRange(0, confettiCanvas.width),
+          y: randomRange(0, confettiCanvas.height - 200),
+          r: randomRange(6, 12),
+          color: colors[Math.floor(Math.random() * colors.length)] + (Math.random() + 0.5) + ')',
+          tilt: randomRange(-10, 10),
+          tiltAngleIncremental: randomRange(0.05, 0.12),
+          tiltAngle: 0,
+          speed: randomRange(2, 5)
+        });
+      }
+    }
+
+    function drawConfetti() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach((p) => {
+        confettiCtx.beginPath();
+        confettiCtx.lineWidth = p.r;
+        confettiCtx.strokeStyle = p.color;
+        confettiCtx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+        confettiCtx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+        confettiCtx.stroke();
+      });
+      updateConfetti();
+      animationFrame = requestAnimationFrame(drawConfetti);
+    }
+
+    function updateConfetti() {
+      confettiParticles.forEach((p, i) => {
+        p.tiltAngle += p.tiltAngleIncremental;
+        p.y += (p.speed);
+        p.x += Math.sin(p.tiltAngle);
+
+        p.tilt = Math.sin(p.tiltAngle) * 15;
+
+        if (p.y > confettiCanvas.height) {
+          p.x = randomRange(0, confettiCanvas.width);
+          p.y = -20;
+        }
+      });
+    }
+
+    function startConfetti() {
+      if (!confettiActive) {
+        confettiActive = true;
+        confettiParticles = [];
+        createConfettiParticles();
+        drawConfetti();
+        setTimeout(stopConfetti, 1500); // 1.5秒後停止
+      }
+    }
+
+    function stopConfetti() {
+      confettiActive = false;
+      cancelAnimationFrame(animationFrame);
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles = [];
+    }
+
+    initConfetti();
+  </script>
+
+  <!-- 主邏輯程式碼 -->
   <script>
     /****************************************************************
      * 1) 全域變數：進度與統計
@@ -465,8 +643,23 @@
     let startTime = new Date();
     let timerInterval;
 
+    // 介面切換
+    let isMobileView = false;
+
     /****************************************************************
-     * 2) 計時器
+     * 2) 切換介面模式（桌面 / 手機）
+     ****************************************************************/
+    function toggleInterface() {
+      isMobileView = !isMobileView;
+      if (isMobileView) {
+        document.body.classList.add('mobile-view');
+      } else {
+        document.body.classList.remove('mobile-view');
+      }
+    }
+
+    /****************************************************************
+     * 3) 計時器
      ****************************************************************/
     function updateTimer() {
       const now = new Date();
@@ -478,7 +671,7 @@
     }
 
     /****************************************************************
-     * 3) 顯示統計＆進度
+     * 4) 顯示統計＆進度
      ****************************************************************/
     function updateStats() {
       document.getElementById('correct-count').textContent = stats.correct;
@@ -512,7 +705,7 @@
     }
 
     /****************************************************************
-     * 4) 本地存儲
+     * 5) 本地存儲
      ****************************************************************/
     function saveProgress() {
       localStorage.setItem('toeicProgress', JSON.stringify({
@@ -533,7 +726,7 @@
     }
 
     /****************************************************************
-     * 5) 詳細解析的彈窗
+     * 6) 詳細解析的彈窗
      ****************************************************************/
     function showExplanation(explanation) {
       if (!explanation) return;
@@ -548,7 +741,7 @@
     }
 
     /****************************************************************
-     * 6) 語音功能
+     * 7) 語音功能
      ****************************************************************/
     let speechSynth = window.speechSynthesis;
     let currentUtterance = null;
@@ -602,7 +795,7 @@
     }
 
     /****************************************************************
-     * 7) 提示訊息顯示
+     * 8) 提示訊息顯示
      ****************************************************************/
     function showError(section, message) {
       const errorDiv = document.getElementById(`${section}-error`);
@@ -613,9 +806,19 @@
       }, 3000);
     }
 
-    function showStatus(section, message) {
+    /**
+     * 顯示狀態訊息，可傳入 type='wrong' 來顯示紅色框
+     * @param {string} section - listening, reading, grammar
+     * @param {string} message - 顯示的文字
+     * @param {string} type - 可選: 'wrong'
+     */
+    function showStatus(section, message, type) {
       const statusDiv = document.getElementById(`${section}-status`);
       statusDiv.textContent = message;
+      statusDiv.className = 'status-message'; // 先重置
+      if (type === 'wrong') {
+        statusDiv.classList.add('wrong'); // 加上紅色框
+      }
       statusDiv.style.display = 'block';
       setTimeout(() => {
         statusDiv.style.display = 'none';
@@ -623,7 +826,7 @@
     }
 
     /****************************************************************
-     * 8) 題目顯示 & 作答邏輯
+     * 9) 題目顯示 & 作答邏輯
      ****************************************************************/
     function findQuestion(section, questionId) {
       return questions[section].find(q => q.id === questionId);
@@ -721,15 +924,28 @@
       }
 
       const isCorrect = (selectedIndex === question.correctAnswer);
+
+      // 更新統計
       stats.total++;
       if (isCorrect) {
         stats.correct++;
-        showStatus(section, '答對了！');
+        // 答對時觸發五彩紙屑
+        startConfetti();
+        showStatus(section, '答對了，恭喜！');
+        selectedOption.classList.remove('selected');
+        selectedOption.classList.add('correct');
       } else {
-        showStatus(section, '答錯了，請繼續努力！');
+        // 🟢 用紅色框提示「答錯了，再接再厲」
+        showStatus(section, '答錯了，再接再厲！', 'wrong');
+        selectedOption.classList.remove('selected');
+        selectedOption.classList.add('incorrect');
+
+        // 顯示正確答案
+        const correctOption = options[question.correctAnswer];
+        correctOption.classList.add('correct-answer');
       }
 
-      // 加入已完成
+      // 記錄完成
       if (!completedQuestions[section].includes(questionId)) {
         completedQuestions[section].push(questionId);
       }
@@ -738,25 +954,28 @@
       updateProgress();
       saveProgress();
 
-      selectedOption.classList.remove('selected');
-      selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect');
-
       // 顯示解析（若有）
       if (question.explanation) {
         showExplanation(question.explanation);
       }
 
-      // 短暫延遲後載入下一題
+      // 2 秒後載入下一題
       setTimeout(() => {
+        // 移除前一題樣式
+        for (let opt of options) {
+          opt.classList.remove('correct');
+          opt.classList.remove('incorrect');
+          opt.classList.remove('correct-answer');
+        }
         displayQuestion(section);
-      }, 1500);
+      }, 2000);
     }
 
     /****************************************************************
-     * 9) 重置所有進度
+     * 10) 重置所有進度 + 清除網站快取
      ****************************************************************/
     function resetProgress() {
-      if (confirm('確定要重置所有進度嗎？此操作無法復原。')) {
+      if (confirm('確定要重置所有進度嗎？(同時將刪除網站快取) 此操作無法復原。')) {
         try {
           completedQuestions = {
             listening: [],
@@ -774,7 +993,17 @@
           };
           localStorage.removeItem('toeicProgress');
           localStorage.clear();
-          alert('進度已成功重置，頁面將重新載入！');
+
+          // 刪除所有 Service Worker Cache
+          if ('caches' in window) {
+            caches.keys().then((cacheNames) => {
+              cacheNames.forEach((cacheName) => {
+                caches.delete(cacheName);
+              });
+            });
+          }
+
+          alert('進度已成功重置，並已刪除快取。頁面將重新載入！');
           window.location.reload();
         } catch (err) {
           console.error('重置失敗:', err);
@@ -784,7 +1013,7 @@
     }
 
     /****************************************************************
-     * 10) 初始化
+     * 11) 初始化
      ****************************************************************/
     function initialize() {
       loadProgress();
