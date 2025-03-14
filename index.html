@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
   <title>多益考試練習系統 - 增強體驗</title>
 
   <style>
@@ -15,7 +15,7 @@
       --bg-color: #f5f5f5;
       --card-bg: #ffffff;
 
-      /* 新增漸層背景色，可依喜好調整 */
+      /* 漸層背景色 */
       --header-gradient: linear-gradient(135deg, #2196f3, #1976d2);
     }
 
@@ -27,14 +27,14 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
-      transition: all 0.3s ease;  /* 在切換模式時做平滑轉換 */
+      transition: all 0.3s ease; /* 切換桌面/手機模式時，做平滑轉換 */
     }
 
     .container {
       background-color: var(--card-bg);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
     }
@@ -52,7 +52,7 @@
     h1 {
       margin: 0;
       font-size: 2.5em;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .progress-bar {
@@ -75,6 +75,8 @@
       justify-content: space-around;
       margin: 20px 0;
       padding: 15px;
+      /* 文字改為深色，避免與背景太接近 */
+      color: #222;
       background-color: #f8f9fa;
       border-radius: 10px;
       animation: fadeIn 0.6s ease;
@@ -110,8 +112,14 @@
     }
 
     @keyframes fadeInQuestion {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .option {
@@ -125,7 +133,7 @@
       animation: fadeInOption 0.8s forwards;
     }
 
-    /* 讓選項分批出現 */
+    /* 選項分批顯示 */
     .option:nth-child(2) {
       animation-delay: 0.1s;
     }
@@ -140,8 +148,14 @@
     }
 
     @keyframes fadeInOption {
-      0% { opacity: 0; transform: translateY(5px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .option:hover {
@@ -161,7 +175,7 @@
       animation: correctPulse 0.4s 2;
     }
 
-    /* 顯示「真正的」正解用 */
+    /* 正解（若答錯時要顯示） */
     .correct-answer {
       background-color: #c8e6c9;
       border-color: var(--success-color);
@@ -170,8 +184,13 @@
     }
 
     @keyframes correctPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
     }
 
     .incorrect {
@@ -180,13 +199,24 @@
       animation: shake 0.6s;
     }
 
-    /* 錯誤時搖晃 */
+    /* 答錯時搖晃 */
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-6px); }
-      40% { transform: translateX(6px); }
-      60% { transform: translateX(-4px); }
-      80% { transform: translateX(4px); }
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-6px);
+      }
+      40% {
+        transform: translateX(6px);
+      }
+      60% {
+        transform: translateX(-4px);
+      }
+      80% {
+        transform: translateX(4px);
+      }
     }
 
     .audio-controls {
@@ -261,7 +291,8 @@
       background-color: #bdbdbd;
     }
 
-    .error-message, .status-message {
+    .error-message,
+    .status-message {
       margin: 10px 0;
       padding: 15px;
       border-radius: 8px;
@@ -279,7 +310,7 @@
       color: var(--success-color);
     }
 
-    /* 🟢 這裡是「錯誤」狀態(答錯了，再接再厲)時，使用紅色邊框 */
+    /* 錯誤提示用紅色框 */
     .status-message.wrong {
       background-color: #ffebee;
       color: var(--error-color);
@@ -287,8 +318,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .timer {
@@ -300,7 +337,7 @@
       padding: 10px 20px;
       border-radius: 20px;
       font-weight: bold;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       z-index: 9999;
     }
 
@@ -311,7 +348,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
       z-index: 1000;
     }
 
@@ -327,8 +364,14 @@
     }
 
     @keyframes modalSlideIn {
-      from { transform: translateY(-100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .close-button {
@@ -357,6 +400,8 @@
     .progress-info {
       margin-top: 20px;
       padding: 15px;
+      /* 同樣改為深色字 */
+      color: #222;
       background-color: #f8f9fa;
       border-radius: 8px;
       animation: fadeIn 0.6s ease;
@@ -382,13 +427,7 @@
       background-color: #d32f2f;
     }
 
-    /* 淡入動畫 */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 🟢 Confetti Canvas：顯示在最上層以達爆裂效果 */
+    /* 五彩紙屑畫布 */
     #confetti-canvas {
       pointer-events: none;
       position: fixed;
@@ -406,61 +445,66 @@
       max-width: 100%;
       padding: 10px;
     }
-
     body.mobile-view .container {
       border-radius: 0;
       padding: 10px;
       box-shadow: none;
     }
-
     body.mobile-view .header {
       border-radius: 0;
       font-size: 1em;
     }
-
+    body.mobile-view .header h1 {
+      font-size: 1.8em;
+      line-height: 1.4em;
+      margin-bottom: 8px;
+    }
     body.mobile-view .stats {
       flex-direction: column;
+      align-items: center;
       gap: 10px;
     }
-
+    body.mobile-view .stat-item {
+      margin: 5px 0;
+    }
+    body.mobile-view .stat-value {
+      font-size: 1.2em;
+    }
+    body.mobile-view .progress-info p {
+      margin-bottom: 8px;
+    }
     body.mobile-view .section {
       margin: 15px 0;
       padding: 10px;
     }
-
     body.mobile-view .section h2 {
       font-size: 1.2em;
     }
-
     body.mobile-view .option {
       margin: 5px 0;
       padding: 10px;
     }
-
-    body.mobile-view .stat-value {
-      font-size: 1.2em;
-    }
-
-    body.mobile-view h1 {
-      font-size: 1.8em;
-    }
   </style>
 </head>
 <body>
-  <!-- 🎉 用於放置五彩紙屑的畫布 -->
+  <!-- 五彩紙屑 -->
   <canvas id="confetti-canvas"></canvas>
 
+  <!-- 計時器 -->
   <div class="timer" id="timer">時間: 00:00</div>
 
   <div class="container">
     <div class="header">
       <h1>多益考試練習系統 - 增強版</h1>
+      <!-- 切換手機/桌面版的按鈕，會動態改文字 -->
       <div style="margin: 10px 0;">
-        <button class="secondary-button" onclick="toggleInterface()">切換介面</button>
+        <button class="secondary-button" id="toggle-btn" onclick="toggleInterface()">切換成手機版</button>
       </div>
+
       <div class="progress-bar">
         <div class="progress" id="progress"></div>
       </div>
+
       <div class="stats">
         <div class="stat-item">
           <div class="stat-value" id="correct-count">0</div>
@@ -475,6 +519,7 @@
           <div>正確率</div>
         </div>
       </div>
+
       <div class="progress-info">
         <p>已完成題目：</p>
         <div class="section-progress">
@@ -488,27 +533,21 @@
 
     <div class="section">
       <h2>聽力練習</h2>
-      <div id="listening-question" class="question">
-        <!-- 聽力題目將由 JavaScript 動態載入 -->
-      </div>
+      <div id="listening-question" class="question"></div>
       <div id="listening-error" class="error-message"></div>
       <div id="listening-status" class="status-message"></div>
     </div>
 
     <div class="section">
       <h2>閱讀練習</h2>
-      <div id="reading-question" class="question">
-        <!-- 閱讀題目將由 JavaScript 動態載入 -->
-      </div>
+      <div id="reading-question" class="question"></div>
       <div id="reading-error" class="error-message"></div>
       <div id="reading-status" class="status-message"></div>
     </div>
 
     <div class="section">
       <h2>語法練習</h2>
-      <div id="grammar-question" class="question">
-        <!-- 語法題目將由 JavaScript 動態載入 -->
-      </div>
+      <div id="grammar-question" class="question"></div>
       <div id="grammar-error" class="error-message"></div>
       <div id="grammar-status" class="status-message"></div>
     </div>
@@ -526,9 +565,8 @@
   <!-- 先載入題庫檔案 -->
   <script src="questions.js"></script>
 
-  <!-- 下面是五彩紙屑的簡易函式 (使用 canvas) -->
+  <!-- 五彩紙屑 Canvas -->
   <script>
-    // 來源參考: https://www.kirilv.com/canvas-confetti/
     const confettiCanvas = document.getElementById('confetti-canvas');
     const confettiCtx = confettiCanvas.getContext('2d');
     let confettiParticles = [];
@@ -550,21 +588,24 @@
 
     function createConfettiParticles() {
       const colors = [
-        'rgba(255,99,71,',   // tomato
-        'rgba(54,162,235,',  // blue
-        'rgba(255,206,86,',  // yellow
-        'rgba(75,192,192,'   // green
+        'rgba(255,99,71,', // tomato
+        'rgba(54,162,235,', // blue
+        'rgba(255,206,86,', // yellow
+        'rgba(75,192,192,' // green
       ];
       for (let i = 0; i < 100; i++) {
         confettiParticles.push({
           x: randomRange(0, confettiCanvas.width),
           y: randomRange(0, confettiCanvas.height - 200),
           r: randomRange(6, 12),
-          color: colors[Math.floor(Math.random() * colors.length)] + (Math.random() + 0.5) + ')',
+          color:
+            colors[Math.floor(Math.random() * colors.length)] +
+            (Math.random() + 0.5) +
+            ')',
           tilt: randomRange(-10, 10),
           tiltAngleIncremental: randomRange(0.05, 0.12),
           tiltAngle: 0,
-          speed: randomRange(2, 5)
+          speed: randomRange(2, 5),
         });
       }
     }
@@ -586,7 +627,7 @@
     function updateConfetti() {
       confettiParticles.forEach((p, i) => {
         p.tiltAngle += p.tiltAngleIncremental;
-        p.y += (p.speed);
+        p.y += p.speed;
         p.x += Math.sin(p.tiltAngle);
 
         p.tilt = Math.sin(p.tiltAngle) * 15;
@@ -620,46 +661,37 @@
 
   <!-- 主邏輯程式碼 -->
   <script>
-    /****************************************************************
-     * 1) 全域變數：進度與統計
-     ****************************************************************/
-    let currentQuestions = {
-      listening: 1,
-      reading: 1,
-      grammar: 1
-    };
-
-    let completedQuestions = {
-      listening: [],
-      reading: [],
-      grammar: []
-    };
-
-    let stats = {
-      correct: 0,
-      total: 0
-    };
+    // 全域變數
+    let currentQuestions = { listening: 1, reading: 1, grammar: 1 };
+    let completedQuestions = { listening: [], reading: [], grammar: [] };
+    let stats = { correct: 0, total: 0 };
 
     let startTime = new Date();
     let timerInterval;
 
-    // 介面切換
+    // 紀錄最後答題的 section，讓關閉詳解時可進下一題
+    let lastAnsweredSection = null;
+
+    // 介面模式
     let isMobileView = false;
 
     /****************************************************************
-     * 2) 切換介面模式（桌面 / 手機）
+     * 切換介面 (手機 <-> 電腦)
      ****************************************************************/
     function toggleInterface() {
       isMobileView = !isMobileView;
+      const toggleBtn = document.getElementById('toggle-btn');
       if (isMobileView) {
         document.body.classList.add('mobile-view');
+        toggleBtn.textContent = '切換成電腦版';
       } else {
         document.body.classList.remove('mobile-view');
+        toggleBtn.textContent = '切換成手機版';
       }
     }
 
     /****************************************************************
-     * 3) 計時器
+     * 計時器
      ****************************************************************/
     function updateTimer() {
       const now = new Date();
@@ -667,66 +699,79 @@
       const minutes = Math.floor(diff / 60);
       const seconds = diff % 60;
       document.getElementById('timer').textContent =
-          `時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        `時間: ${minutes.toString().padStart(2, '0')}:${seconds
+          .toString()
+          .padStart(2, '0')}`;
     }
 
     /****************************************************************
-     * 4) 顯示統計＆進度
+     * 顯示統計 & 進度
      ****************************************************************/
     function updateStats() {
       document.getElementById('correct-count').textContent = stats.correct;
       document.getElementById('total-count').textContent = stats.total;
-      const accuracy = stats.total > 0
-        ? Math.round((stats.correct / stats.total) * 100)
-        : 0;
+      const accuracy =
+        stats.total > 0
+          ? Math.round((stats.correct / stats.total) * 100)
+          : 0;
       document.getElementById('accuracy').textContent = `${accuracy}%`;
     }
 
     function updateProgress() {
-      // 更新各部分的進度
-      document.getElementById('listening-progress').textContent = completedQuestions.listening.length;
-      document.getElementById('reading-progress').textContent = completedQuestions.reading.length;
-      document.getElementById('grammar-progress').textContent = completedQuestions.grammar.length;
+      document.getElementById('listening-progress').textContent =
+        completedQuestions.listening.length;
+      document.getElementById('reading-progress').textContent =
+        completedQuestions.reading.length;
+      document.getElementById('grammar-progress').textContent =
+        completedQuestions.grammar.length;
 
-      // 更新總題數
-      document.getElementById('listening-total').textContent = questions.listening.length;
-      document.getElementById('reading-total').textContent = questions.reading.length;
-      document.getElementById('grammar-total').textContent = questions.grammar.length;
+      document.getElementById('listening-total').textContent =
+        questions.listening.length;
+      document.getElementById('reading-total').textContent =
+        questions.reading.length;
+      document.getElementById('grammar-total').textContent =
+        questions.grammar.length;
 
-      // 更新進度條
-      const totalQuestions = questions.listening.length +
-                             questions.reading.length +
-                             questions.grammar.length;
-      const completedTotal = completedQuestions.listening.length +
-                             completedQuestions.reading.length +
-                             completedQuestions.grammar.length;
+      const totalQuestions =
+        questions.listening.length +
+        questions.reading.length +
+        questions.grammar.length;
+      const completedTotal =
+        completedQuestions.listening.length +
+        completedQuestions.reading.length +
+        completedQuestions.grammar.length;
       const progress = (completedTotal / totalQuestions) * 100;
       document.getElementById('progress').style.width = `${progress}%`;
     }
 
     /****************************************************************
-     * 5) 本地存儲
+     * 本地存儲
      ****************************************************************/
     function saveProgress() {
-      localStorage.setItem('toeicProgress', JSON.stringify({
-        completedQuestions,
-        currentQuestions,
-        stats
-      }));
+      localStorage.setItem(
+        'toeicProgress',
+        JSON.stringify({
+          completedQuestions,
+          currentQuestions,
+          stats,
+        })
+      );
     }
 
     function loadProgress() {
       const savedData = localStorage.getItem('toeicProgress');
       if (savedData) {
         const data = JSON.parse(savedData);
-        completedQuestions = data.completedQuestions || { listening: [], reading: [], grammar: [] };
-        currentQuestions = data.currentQuestions || { listening: 1, reading: 1, grammar: 1 };
+        completedQuestions =
+          data.completedQuestions || { listening: [], reading: [], grammar: [] };
+        currentQuestions =
+          data.currentQuestions || { listening: 1, reading: 1, grammar: 1 };
         stats = data.stats || { correct: 0, total: 0 };
       }
     }
 
     /****************************************************************
-     * 6) 詳細解析的彈窗
+     * 詳細解析的彈窗
      ****************************************************************/
     function showExplanation(explanation) {
       if (!explanation) return;
@@ -736,12 +781,25 @@
       modal.style.display = 'block';
     }
 
+    // 關閉詳解 -> 進入下一題
     function closeExplanation() {
       document.getElementById('explanation-modal').style.display = 'none';
+      proceedNextQuestion();
+    }
+
+    // 往下一題
+    function proceedNextQuestion() {
+      // 移除前一題的 correct/incorrect 樣式
+      const container = document.getElementById(`${lastAnsweredSection}-question`);
+      const options = container.getElementsByClassName('option');
+      for (let opt of options) {
+        opt.classList.remove('correct', 'incorrect', 'correct-answer');
+      }
+      displayQuestion(lastAnsweredSection);
     }
 
     /****************************************************************
-     * 7) 語音功能
+     * 語音功能
      ****************************************************************/
     let speechSynth = window.speechSynthesis;
     let currentUtterance = null;
@@ -750,26 +808,26 @@
       male: {
         name: 'Microsoft David - English (United States)',
         pitch: 0.9,
-        rate: 0.9
+        rate: 0.9,
       },
       female: {
         name: 'Microsoft Zira - English (United States)',
         pitch: 1.1,
-        rate: 0.9
-      }
+        rate: 0.9,
+      },
     };
 
     function getVoice(speaker) {
       const voiceSettings = voicesConfig[speaker] || voicesConfig.male;
       const availableVoices = speechSynth.getVoices();
-      let voice = availableVoices.find(v => v.name === voiceSettings.name);
+      let voice = availableVoices.find((v) => v.name === voiceSettings.name);
       if (!voice) {
         voice = availableVoices[0];
       }
       return {
         voice: voice,
         pitch: voiceSettings.pitch,
-        rate: voiceSettings.rate
+        rate: voiceSettings.rate,
       };
     }
 
@@ -784,18 +842,21 @@
         currentUtterance.lang = 'en-US';
         currentUtterance.rate = voiceSettings.rate;
         currentUtterance.pitch = voiceSettings.pitch;
-        currentUtterance.onerror = function() {
+        currentUtterance.onerror = function () {
           showError('listening', '語音播放失敗，請檢查瀏覽器設定或重新整理頁面');
         };
         speechSynth.speak(currentUtterance);
         showStatus('listening', '正在播放音訊...');
       } catch (error) {
-        showError('listening', '您的瀏覽器可能不支援語音功能，請使用最新版的 Chrome 或 Edge。');
+        showError(
+          'listening',
+          '您的瀏覽器可能不支援語音功能，請使用最新版的 Chrome 或 Edge。'
+        );
       }
     }
 
     /****************************************************************
-     * 8) 提示訊息顯示
+     * 提示訊息
      ****************************************************************/
     function showError(section, message) {
       const errorDiv = document.getElementById(`${section}-error`);
@@ -807,17 +868,17 @@
     }
 
     /**
-     * 顯示狀態訊息，可傳入 type='wrong' 來顯示紅色框
+     * 顯示狀態訊息
      * @param {string} section - listening, reading, grammar
      * @param {string} message - 顯示的文字
-     * @param {string} type - 可選: 'wrong'
+     * @param {string} type - 可選: 'wrong' (紅色框)
      */
     function showStatus(section, message, type) {
       const statusDiv = document.getElementById(`${section}-status`);
       statusDiv.textContent = message;
-      statusDiv.className = 'status-message'; // 先重置
+      statusDiv.className = 'status-message'; // 重置
       if (type === 'wrong') {
-        statusDiv.classList.add('wrong'); // 加上紅色框
+        statusDiv.classList.add('wrong');
       }
       statusDiv.style.display = 'block';
       setTimeout(() => {
@@ -826,10 +887,10 @@
     }
 
     /****************************************************************
-     * 9) 題目顯示 & 作答邏輯
+     * 題目顯示 & 作答
      ****************************************************************/
     function findQuestion(section, questionId) {
-      return questions[section].find(q => q.id === questionId);
+      return questions[section].find((q) => q.id === questionId);
     }
 
     function isCompleted(section, id) {
@@ -837,7 +898,7 @@
     }
 
     function getNextQuestionId(section) {
-      const allIds = questions[section].map(q => q.id);
+      const allIds = questions[section].map((q) => q.id);
       for (let id of allIds) {
         if (!isCompleted(section, id)) {
           return id;
@@ -873,9 +934,8 @@
             </button>
           </div>
         `;
-      }
-      // 閱讀題目
-      else if (section === 'reading' && question.passage) {
+      } else if (section === 'reading' && question.passage) {
+        // 閱讀題目
         html += `
           <div class="passage">
             <p>${question.passage}</p>
@@ -883,7 +943,7 @@
         `;
       }
 
-      // 選項
+      // 顯示選項
       question.options.forEach((option, index) => {
         html += `
           <div class="option" onclick="selectAnswer('${section}', ${index})">
@@ -907,6 +967,8 @@
     }
 
     function submitAnswer(section) {
+      lastAnsweredSection = section; // 紀錄是哪個區塊
+
       const container = document.getElementById(`${section}-question`);
       const options = container.getElementsByClassName('option');
       const selectedOption = container.querySelector('.selected');
@@ -914,6 +976,9 @@
         showError(section, '請選擇一個答案！');
         return;
       }
+
+      // 確保畫面捲動到題目區，避免看不到正確答案
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       const selectedIndex = Array.from(options).indexOf(selectedOption);
       const questionId = currentQuestions[section];
@@ -923,29 +988,25 @@
         return;
       }
 
-      const isCorrect = (selectedIndex === question.correctAnswer);
+      const isCorrect = selectedIndex === question.correctAnswer;
 
-      // 更新統計
       stats.total++;
       if (isCorrect) {
         stats.correct++;
-        // 答對時觸發五彩紙屑
-        startConfetti();
+        startConfetti(); // 答對 -> 五彩紙屑
         showStatus(section, '答對了，恭喜！');
         selectedOption.classList.remove('selected');
         selectedOption.classList.add('correct');
       } else {
-        // 🟢 用紅色框提示「答錯了，再接再厲」
         showStatus(section, '答錯了，再接再厲！', 'wrong');
         selectedOption.classList.remove('selected');
         selectedOption.classList.add('incorrect');
-
         // 顯示正確答案
-        const correctOption = options[question.correctAnswer];
-        correctOption.classList.add('correct-answer');
+        const correctOpt = options[question.correctAnswer];
+        correctOpt.classList.add('correct-answer');
       }
 
-      // 記錄完成
+      // 紀錄完成
       if (!completedQuestions[section].includes(questionId)) {
         completedQuestions[section].push(questionId);
       }
@@ -954,43 +1015,30 @@
       updateProgress();
       saveProgress();
 
-      // 顯示解析（若有）
-      if (question.explanation) {
-        showExplanation(question.explanation);
-      }
-
-      // 2 秒後載入下一題
+      // 等1秒後，才出現詳解 (如有)
       setTimeout(() => {
-        // 移除前一題樣式
-        for (let opt of options) {
-          opt.classList.remove('correct');
-          opt.classList.remove('incorrect');
-          opt.classList.remove('correct-answer');
+        if (question.explanation) {
+          showExplanation(question.explanation);
+        } else {
+          // 若無詳解，直接進下一題
+          proceedNextQuestion();
         }
-        displayQuestion(section);
-      }, 2000);
+      }, 1000);
     }
 
     /****************************************************************
-     * 10) 重置所有進度 + 清除網站快取
+     * 重置進度 + 清除快取
      ****************************************************************/
     function resetProgress() {
-      if (confirm('確定要重置所有進度嗎？(同時將刪除網站快取) 此操作無法復原。')) {
+      if (
+        confirm(
+          '確定要重置所有進度嗎？(同時將刪除網站快取)\n此操作無法復原。'
+        )
+      ) {
         try {
-          completedQuestions = {
-            listening: [],
-            reading: [],
-            grammar: []
-          };
-          currentQuestions = {
-            listening: 1,
-            reading: 1,
-            grammar: 1
-          };
-          stats = {
-            correct: 0,
-            total: 0
-          };
+          completedQuestions = { listening: [], reading: [], grammar: [] };
+          currentQuestions = { listening: 1, reading: 1, grammar: 1 };
+          stats = { correct: 0, total: 0 };
           localStorage.removeItem('toeicProgress');
           localStorage.clear();
 
@@ -1013,7 +1061,7 @@
     }
 
     /****************************************************************
-     * 11) 初始化
+     * 初始化
      ****************************************************************/
     function initialize() {
       loadProgress();
@@ -1023,13 +1071,13 @@
       startTime = new Date();
       timerInterval = setInterval(updateTimer, 1000);
 
-      // 等待聲音列表載入，之後依序顯示聽力、閱讀、語法題
-      speechSynthesis.onvoiceschanged = function() {
-        ['listening', 'reading', 'grammar'].forEach(section => displayQuestion(section));
+      // 等待聲音列表載入後，再載入題目
+      speechSynthesis.onvoiceschanged = function () {
+        ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       };
-      // 有些瀏覽器直接就有 voices
+      // 有些瀏覽器 getVoices() 可能馬上有值
       if (speechSynthesis.getVoices().length > 0) {
-        ['listening', 'reading', 'grammar'].forEach(section => displayQuestion(section));
+        ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       }
     }
 
