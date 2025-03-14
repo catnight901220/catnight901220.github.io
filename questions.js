@@ -1,10 +1,12 @@
 const questions = {
     // ================== 聽力 (Listening) ==================
     listening: [
+      // ===== 原本的 10 題 (id: 1 ~ 10) =====
       {
         id: 1,
         question: "What does the speaker imply about the quarterly sales targets?",
-        audioText: "Despite the market slowdown, our quarterly sales targets were surpassed by nearly 15%. I'd like to thank the entire international team for their diligence. However, we must prepare for fluctuations in the upcoming period due to global uncertainties.",
+        audioText:
+          "Despite the market slowdown, our quarterly sales targets were surpassed by nearly 15%. I'd like to thank the entire international team for their diligence. However, we must prepare for fluctuations in the upcoming period due to global uncertainties.",
         speaker: "male",
         options: [
           "They exactly met the initial targets",
@@ -33,7 +35,8 @@ const questions = {
       {
         id: 2,
         question: "What is the main concern expressed by the woman?",
-        audioText: "I'm concerned about the upcoming product launch timeline. With our design team behind schedule and the marketing campaign still unfinished, we might miss the initial release date. Let's consider adjusting our promotional strategy to accommodate these delays.",
+        audioText:
+          "I'm concerned about the upcoming product launch timeline. With our design team behind schedule and the marketing campaign still unfinished, we might miss the initial release date. Let's consider adjusting our promotional strategy to accommodate these delays.",
         speaker: "female",
         options: [
           "The product design is already complete",
@@ -61,7 +64,8 @@ const questions = {
       {
         id: 3,
         question: "According to the conversation, why will the team need extra funding?",
-        audioText: "We’ve encountered unexpected costs in software licensing and hardware upgrades. To maintain product quality, we’ll need an additional budget allocation for the next two quarters.",
+        audioText:
+          "We’ve encountered unexpected costs in software licensing and hardware upgrades. To maintain product quality, we’ll need an additional budget allocation for the next two quarters.",
         speaker: "male",
         options: [
           "To hire more staff for new projects",
@@ -88,7 +92,8 @@ const questions = {
       {
         id: 4,
         question: "What does the woman suggest to address the shortage of staff?",
-        audioText: "Given the pace of our current projects, we should consider hiring temporary contractors to handle the seasonal workload. Full-time recruitment may not be necessary yet, but we need flexibility in the coming months.",
+        audioText:
+          "Given the pace of our current projects, we should consider hiring temporary contractors to handle the seasonal workload. Full-time recruitment may not be necessary yet, but we need flexibility in the coming months.",
         speaker: "female",
         options: [
           "Hiring more full-time employees",
@@ -115,7 +120,8 @@ const questions = {
       {
         id: 5,
         question: "What is the main purpose of the man's announcement?",
-        audioText: "I'm pleased to announce that our overseas branch in Singapore has finalized a joint venture with a local tech startup. This partnership will facilitate our expansion into the Southeast Asian market, providing us with cutting-edge research opportunities.",
+        audioText:
+          "I'm pleased to announce that our overseas branch in Singapore has finalized a joint venture with a local tech startup. This partnership will facilitate our expansion into the Southeast Asian market, providing us with cutting-edge research opportunities.",
         speaker: "male",
         options: [
           "To discontinue operations in Asia",
@@ -142,7 +148,8 @@ const questions = {
       {
         id: 6,
         question: "What does the woman say about the market forecast?",
-        audioText: "Our projections indicate a stagnant domestic market for the next quarter, largely due to lower consumer confidence. However, international demand for our premium product line seems promising.",
+        audioText:
+          "Our projections indicate a stagnant domestic market for the next quarter, largely due to lower consumer confidence. However, international demand for our premium product line seems promising.",
         speaker: "female",
         options: [
           "She believes domestic demand will increase significantly",
@@ -169,7 +176,8 @@ const questions = {
       {
         id: 7,
         question: "According to the male speaker, why is the meeting postponed?",
-        audioText: "I just received a notice that the key stakeholder from our parent company couldn't catch her flight due to severe weather conditions. So the quarterly review meeting will be postponed until she arrives next week.",
+        audioText:
+          "I just received a notice that the key stakeholder from our parent company couldn't catch her flight due to severe weather conditions. So the quarterly review meeting will be postponed until she arrives next week.",
         speaker: "male",
         options: [
           "Because the venue is under renovation",
@@ -196,7 +204,8 @@ const questions = {
       {
         id: 8,
         question: "What does the woman imply about the recent marketing survey?",
-        audioText: "Interestingly, the results showed that brand loyalty among younger consumers is lower than anticipated, suggesting we may need a fresh approach to retain this demographic.",
+        audioText:
+          "Interestingly, the results showed that brand loyalty among younger consumers is lower than anticipated, suggesting we may need a fresh approach to retain this demographic.",
         speaker: "female",
         options: [
           "They have decided to ignore younger consumers",
@@ -223,7 +232,8 @@ const questions = {
       {
         id: 9,
         question: "What is the main reason behind the shipping delay?",
-        audioText: "Our freight forwarding partner just informed us that there's a congestion issue at the port due to new customs regulations. Until the backlog is cleared, all shipments will be delayed by at least three days.",
+        audioText:
+          "Our freight forwarding partner just informed us that there's a congestion issue at the port due to new customs regulations. Until the backlog is cleared, all shipments will be delayed by at least three days.",
         speaker: "male",
         options: [
           "A sudden increase in product demand",
@@ -251,7 +261,8 @@ const questions = {
       {
         id: 10,
         question: "What will the speaker likely do next regarding the client's request?",
-        audioText: "They've asked us to revise our proposal to include a more comprehensive after-sales support plan. I'll gather feedback from the customer service team and prepare an updated draft by Friday.",
+        audioText:
+          "They've asked us to revise our proposal to include a more comprehensive after-sales support plan. I'll gather feedback from the customer service team and prepare an updated draft by Friday.",
         speaker: "female",
         options: [
           "Refuse to revise the proposal",
@@ -274,17 +285,300 @@ const questions = {
             多益聽力中常出現與提案書 (proposal) 修訂有關的動作，如 "revise"、"update"、"draft" 等。
           </p>
         `
+      },
+  
+      // ===== 新增的 10 題 (id: 11 ~ 20) =====
+      {
+        id: 11,
+        question: "According to the conversation, what led to the staff reorganization?",
+        audioText:
+          "After reviewing our sales performance, we realized that some departments were overstaffed, while others were lacking key personnel. To optimize efficiency and reduce overlapping responsibilities, we've decided to reassign certain teams. This should help us better meet client demands without increasing payroll costs.",
+        speaker: "male",
+        options: [
+          "A shortage of qualified applicants",
+          "An unexpected decrease in sales",
+          "An imbalance in departmental staffing",
+          "A directive from the government"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>對話中提到「部分部門過度用人，其他部門卻人手不足」，因此重新配置人力。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>overstaffed (adj.) - 人員過多的</li>
+            <li>personnel (n.) - 人員、人事</li>
+            <li>overlapping responsibilities - 重疊的職責</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            人力配置與預算控管是多益商業聽力常見考題，需注意「效率」與「成本」的關鍵字。
+          </p>
+        `
+      },
+      {
+        id: 12,
+        question: "What concern does the woman mention about the upcoming webinar?",
+        audioText:
+          "Our marketing team scheduled the webinar for 9 AM Eastern Time, but we've had feedback from European clients saying it's too late in their day. We might lose potential participants unless we adjust the schedule or provide a recorded session afterward.",
+        speaker: "female",
+        options: [
+          "The webinar topic is too technical for new clients",
+          "The session might be too long and detailed",
+          "European clients find the time inconvenient",
+          "They do not have enough marketing materials"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>女性提到歐洲客戶反映時間太晚，可能導致參與度下降。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>webinar (n.) - 線上研討會</li>
+            <li>participant (n.) - 與會者</li>
+            <li>recorded session - 錄製版的會議</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            常見商業情境：跨時區活動安排。注意時差問題以及「提供錄製回放」作為解決方案。
+          </p>
+        `
+      },
+      {
+        id: 13,
+        question: "Why does the male speaker believe the advertising budget needs to be increased?",
+        audioText:
+          "We've seen a surge in online traffic following our recent promotional campaigns, but conversions remain low. Allocating more funds to targeted ads could help us reach the right demographics and significantly improve our sales figures.",
+        speaker: "male",
+        options: [
+          "To launch a global office expansion",
+          "To update outdated product designs",
+          "To invest in targeted advertising",
+          "To cover rising shipping costs"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>男性說話者認為要投入更多預算於「精準投放廣告」，以提升轉換率。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>surge (n.) - 激增</li>
+            <li>conversion (n.) - 轉換（此處指瀏覽者轉換成購買者）</li>
+            <li>demographic (n.) - 人口群體、目標客層</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益聽力中常考「行銷成效」和「廣告預算」，要特別留意「轉換率」等用語。
+          </p>
+        `
+      },
+      {
+        id: 14,
+        question: "What does the woman imply about next quarter's market trends?",
+        audioText:
+          "Considering the recent shift in consumer preferences toward eco-friendly packaging, we anticipate a rise in demand for biodegradable containers. However, we should also prepare for possible supply chain disruptions if raw materials remain scarce.",
+        speaker: "female",
+        options: [
+          "Consumers no longer care about sustainability",
+          "Demand for biodegradable packaging will likely go up",
+          "Eco-friendly products are becoming too expensive",
+          "They should stop investing in new materials"
+        ],
+        correctAnswer: 1,
+        explanation: `
+          <h4>解析：</h4>
+          <p>女性表示「綠色包裝」的需求將提高，但需留意材料短缺風險。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>biodegradable (adj.) - 可生物分解的</li>
+            <li>disruption (n.) - 中斷、干擾</li>
+            <li>raw material (n.) - 原料</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            考生需掌握「市場趨勢預測」以及「供應鏈中斷」等商業用語，特別是綠色商品需求的關鍵詞。
+          </p>
+        `
+      },
+      {
+        id: 15,
+        question: "What is the main purpose of the woman's phone call?",
+        audioText:
+          "Hello, this is Rita from Megastar Logistics. I'm calling to confirm the pickup date for your bulk shipment. We noticed the items haven't cleared customs yet, so we want to discuss the revised timeline and any additional documents required.",
+        speaker: "female",
+        options: [
+          "To promote a new product line",
+          "To reschedule a shipment pickup",
+          "To request a refund for damaged goods",
+          "To change the shipping destination"
+        ],
+        correctAnswer: 1,
+        explanation: `
+          <h4>解析：</h4>
+          <p>她來電是為了確認交貨時間並討論延後時程，主因是貨品尚未通關。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>pickup (n.) - 提貨、取貨</li>
+            <li>bulk shipment (n.) - 大宗貨物運輸</li>
+            <li>revised timeline - 修訂後的時程</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            物流場景中常考「運送/提貨時間確認」、海關問題與文件需求。
+          </p>
+        `
+      },
+      {
+        id: 16,
+        question: "According to the man, what is the biggest challenge in international expansion?",
+        audioText:
+          "Although we have sufficient capital to open new branches abroad, our main hurdle is adapting to different regulatory environments. Navigating local labor laws and tax codes can be time-consuming, and we need legal experts to ensure compliance in each region.",
+        speaker: "male",
+        options: [
+          "Finding enough financial resources",
+          "Recruiting local marketing staff",
+          "Understanding and complying with local regulations",
+          "Securing office space in major cities"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>男性強調法規差異是最大的挑戰，需要聘請法律專家因應各國勞動法與稅制。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>hurdle (n.) - 障礙、困難</li>
+            <li>compliance (n.) - 遵守</li>
+            <li>tax code (n.) - 稅法</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            國際擴張的常見考題面向：融資、法規、文化差異等。此題著重於「合規性」的挑戰。
+          </p>
+        `
+      },
+      {
+        id: 17,
+        question: "What does the woman suggest doing to address the drop in customer satisfaction ratings?",
+        audioText:
+          "We've been receiving complaints about delayed support responses and unclear return policies. I'd recommend setting up a dedicated hotline for urgent inquiries and revising our FAQ section to clarify our product warranty and refund procedures.",
+        speaker: "female",
+        options: [
+          "Eliminate the return policy entirely",
+          "Hire more sales representatives",
+          "Establish a specialized customer support channel",
+          "Provide fewer details in the FAQ section"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>她建議開設專門的客服熱線，並更新常見問題區，以改善客戶滿意度。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>dedicated hotline - 專用電話線</li>
+            <li>inquiry (n.) - 詢問</li>
+            <li>refund procedures - 退款流程</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益常考「客服與售後服務」情境；要留意問題點（延遲回覆、不清楚退貨規範）與解決方案。
+          </p>
+        `
+      },
+      {
+        id: 18,
+        question: "What does the male speaker propose to streamline the product testing phase?",
+        audioText:
+          "Given the complexity of our new prototype, I suggest incorporating automated testing tools to reduce manual errors. This will speed up the quality assurance process and allow the team to focus on critical design improvements.",
+        speaker: "male",
+        options: [
+          "Extending the product launch deadline",
+          "Replacing the current QA team",
+          "Using automation to expedite testing",
+          "Eliminating testing entirely"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>男性提議使用自動化測試工具，縮短測試時間並減少人工失誤。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>prototype (n.) - 原型</li>
+            <li>automated testing (n.) - 自動化測試</li>
+            <li>quality assurance (QA) - 品質保證</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            在科技與研發情境的多益聽力題中，常出現測試、品質保證與效率提升等關鍵詞。
+          </p>
+        `
+      },
+      {
+        id: 19,
+        question: "How does the woman plan to handle the rising material costs?",
+        audioText:
+          "Because steel prices have nearly doubled, I've negotiated a long-term supply contract with our primary vendor. This way, we lock in current rates, even if the market continues to fluctuate. We'll also explore alternative materials, but for now, the contract offers some stability.",
+        speaker: "female",
+        options: [
+          "She will discontinue production altogether",
+          "She will raise product prices immediately",
+          "She will establish a fixed-rate agreement with the supplier",
+          "She will reduce the quality of the materials used"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>她透過與供應商簽訂長期合約，鎖定材料價格，以對抗市場波動。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>lock in (v.) - 鎖定</li>
+            <li>fluctuate (v.) - 波動</li>
+            <li>stability (n.) - 穩定性</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            在多益聽力中，價格談判和供應鏈管理是常考場景，特別是「長期合約」作為因應策略。
+          </p>
+        `
+      },
+      {
+        id: 20,
+        question: "What does the man imply about the holiday season sales strategy?",
+        audioText:
+          "We need to launch our holiday promotions earlier this year, given last quarter's underperformance. A tiered discount system could attract both budget shoppers and those looking for premium bundles. Timing is crucial, so I'd like our marketing team to finalize the campaign details by next Monday.",
+        speaker: "male",
+        options: [
+          "He believes starting promotions later will increase demand",
+          "He wants to target only high-end customers",
+          "He plans a multi-level discount approach to appeal to different buyers",
+          "He suggests canceling the holiday campaign altogether"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>他打算採用「分級折扣」策略，能同時吸引預算型消費者與尋求高價組合的客群。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>tiered discount system - 分層式折扣系統</li>
+            <li>underperformance (n.) - 表現不佳</li>
+            <li>bundle (n.) - 組合包</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            在多益商業銷售情境中，促銷策略與時機 (timing) 是常見考點，需抓住關鍵細節。
+          </p>
+        `
       }
     ],
   
     // ================== 閱讀 (Reading) ==================
     reading: [
+      // ===== 原本的 10 題 (id: 1 ~ 10) =====
       {
         id: 1,
         question: "What is the main purpose of this article?",
         passage: `In an effort to address declining consumer trust, the Global Data Privacy Summit recently convened in Brussels to discuss stricter regulations on data collection and usage. Over 500 delegates from technology firms, government agencies, and advocacy groups participated in panel discussions examining the long-term impact of unregulated data mining. The summit's keynote speaker, a leading cybersecurity expert, highlighted the urgent need for transparent corporate practices and consumer education.
   
-                  Conference attendees also explored emerging technologies designed to safeguard user data. Biometric authentication and end-to-end encryption were showcased as potential solutions. However, many raised concerns about the scalability of these technologies, particularly in regions with limited internet infrastructure. Despite the challenges, there was a consensus that collaboration between private and public sectors is essential to creating a balanced framework for data governance.`,
+                    Conference attendees also explored emerging technologies designed to safeguard user data. Biometric authentication and end-to-end encryption were showcased as potential solutions. However, many raised concerns about the scalability of these technologies, particularly in regions with limited internet infrastructure. Despite the challenges, there was a consensus that collaboration between private and public sectors is essential to creating a balanced framework for data governance.`,
         options: [
           "To introduce a new technological device for data encryption",
           "To summarize discussions from the Global Data Privacy Summit",
@@ -313,7 +607,7 @@ const questions = {
         question: "Which of the following best describes the research findings mentioned in paragraph 2?",
         passage: `A recent study conducted by the International Council on Sustainable Development has revealed that companies integrating environmentally friendly practices not only reduce their carbon footprint but also experience a surge in brand loyalty. Researchers surveyed over 10,000 consumers across 15 countries, finding that 78% were more likely to support businesses that actively reduce waste, conserve energy, or employ green manufacturing processes.
   
-                   Interestingly, the study also noted a significant correlation between transparent reporting of sustainability goals and increased consumer engagement. When companies publicly shared their progress on cutting emissions or minimizing plastic use, customers were more likely to engage positively on social media and recommend the brand to friends. The findings suggest that proactive environmental measures, combined with open communication, can substantially bolster a company's competitive edge in a crowded global market.`,
+                     Interestingly, the study also noted a significant correlation between transparent reporting of sustainability goals and increased consumer engagement. When companies publicly shared their progress on cutting emissions or minimizing plastic use, customers were more likely to engage positively on social media and recommend the brand to friends. The findings suggest that proactive environmental measures, combined with open communication, can substantially bolster a company's competitive edge in a crowded global market.`,
         options: [
           "They indicate that consumers do not value environmental policies",
           "They show a decrease in brand loyalty for eco-friendly companies",
@@ -341,7 +635,7 @@ const questions = {
         question: "Which statement best captures the author's attitude in the third paragraph?",
         passage: `While the recent expansion of cryptocurrency markets has garnered widespread media coverage, many analysts remain skeptical about the long-term stability of digital coins. According to financial experts, the market's rapid fluctuations—often triggered by social media sentiment—highlight a lack of regulatory oversight. This volatility raises concerns that inexperienced investors might incur substantial losses, further fueling debates on implementing stricter investor protection laws.
   
-                   Nevertheless, some proponents argue that digital assets represent a revolutionary shift in how financial transactions are conducted, offering decentralization and potential cost savings. The author, however, maintains a cautious stance, acknowledging both the innovative potential and the inherent risks that cryptocurrencies pose to ordinary consumers and institutional investors alike.`,
+                     Nevertheless, some proponents argue that digital assets represent a revolutionary shift in how financial transactions are conducted, offering decentralization and potential cost savings. The author, however, maintains a cautious stance, acknowledging both the innovative potential and the inherent risks that cryptocurrencies pose to ordinary consumers and institutional investors alike.`,
         options: [
           "Enthusiastic about the unlimited potential of cryptocurrencies",
           "Indifferent to the debates on financial innovations",
@@ -355,7 +649,7 @@ const questions = {
           <h4>重要單字：</h4>
           <ul>
             <li>fluctuation (n.) - 波動</li>
-            <li>oversight (n.) - 監管、不小心的錯誤 (依文脈為監管)</li>
+            <li>oversight (n.) - 監管</li>
             <li>decentralization (n.) - 去中心化</li>
           </ul>
           <h4>學習重點：</h4>
@@ -369,7 +663,7 @@ const questions = {
         question: "What can be inferred from the details about the company's workforce strategy?",
         passage: `Global Tech Solutions, a multinational software provider, recently announced a robust workforce diversification plan aimed at expanding its remote and cross-functional teams. Over the past fiscal year, they have increased international hires by 40%, embracing a broader range of technical backgrounds and language proficiencies to better serve regional markets. Additionally, they have implemented flexible working arrangements, allowing employees to choose schedules that align with varying time zones and family commitments.
   
-                   Internal surveys show that this approach not only decreases turnover but also enhances employee satisfaction. However, some managers expressed concerns about maintaining cohesive communication among geographically dispersed teams. To address this, Global Tech Solutions has invested heavily in virtual collaboration tools and intercultural training programs. While still in its early stages, the company believes this initiative will foster a more inclusive, dynamic environment, ultimately driving innovation and global market penetration.`,
+                     Internal surveys show that this approach not only decreases turnover but also enhances employee satisfaction. However, some managers expressed concerns about maintaining cohesive communication among geographically dispersed teams. To address this, Global Tech Solutions has invested heavily in virtual collaboration tools and intercultural training programs. While still in its early stages, the company believes this initiative will foster a more inclusive, dynamic environment, ultimately driving innovation and global market penetration.`,
         options: [
           "Global Tech Solutions is reducing its remote workforce",
           "Flexible scheduling has increased employee turnover",
@@ -398,7 +692,7 @@ const questions = {
         question: "What does the author primarily emphasize in the first paragraph?",
         passage: `The growing popularity of online certification programs has led many professionals to question the long-standing value of traditional degrees. With institutions ranging from Ivy League universities to local community colleges now offering digital badges and micro-credentials, the educational landscape appears more competitive and accessible. However, critics argue that not all programs maintain consistent quality, and some question whether these shorter courses sufficiently develop the critical thinking skills typically associated with extended study.
   
-                   To address these concerns, several accrediting bodies have begun establishing universal standards for online programs, ensuring that course outcomes meet industry requirements. The shift also places greater responsibility on learners to research program reputations and verify accreditation. Nonetheless, many see the rise of online credentials as a transformative force that democratizes education and fosters continuous learning in fast-evolving job markets.`,
+                     To address these concerns, several accrediting bodies have begun establishing universal standards for online programs, ensuring that course outcomes meet industry requirements. The shift also places greater responsibility on learners to research program reputations and verify accreditation. Nonetheless, many see the rise of online credentials as a transformative force that democratizes education and fosters continuous learning in fast-evolving job markets.`,
         options: [
           "The cost-effectiveness of traditional degree programs",
           "The need to ban online certification programs",
@@ -426,7 +720,7 @@ const questions = {
         question: "According to the passage, why are investors closely monitoring bio-plastics research?",
         passage: `As environmental legislation tightens around the globe, many corporations have begun exploring bio-based plastics as an alternative to traditional petroleum-derived materials. Researchers claim these innovative polymers could reduce carbon emissions and mitigate landfill waste by decomposing more rapidly under the right conditions. However, cost and scalability remain significant barriers to widespread adoption, forcing companies to weigh immediate expenses against long-term sustainability gains.
   
-                   In response, venture capitalists and private equity firms have funneled considerable funding into bio-plastics startups, hoping to capitalize on an emerging market that promises both environmental benefits and profitable returns. Analysts predict that if mass production becomes feasible, early investors stand to gain substantial rewards. Nonetheless, skepticism persists regarding the actual biodegradability of certain bio-plastics, with critics demanding more comprehensive lifecycle assessments before fully endorsing these materials.`,
+                     In response, venture capitalists and private equity firms have funneled considerable funding into bio-plastics startups, hoping to capitalize on an emerging market that promises both environmental benefits and profitable returns. Analysts predict that if mass production becomes feasible, early investors stand to gain substantial rewards. Nonetheless, skepticism persists regarding the actual biodegradability of certain bio-plastics, with critics demanding more comprehensive lifecycle assessments before fully endorsing these materials.`,
         options: [
           "Because petroleum-derived materials are cheaper to produce",
           "Because bio-plastics may become a profitable and eco-friendly market",
@@ -455,7 +749,7 @@ const questions = {
         question: "Which statement is most strongly supported by the details in paragraph 2?",
         passage: `Contrary to popular belief, implementing a four-day workweek does not necessarily compromise productivity. A pilot program conducted across multiple international offices demonstrated that employees, given an extra day of rest, exhibited higher morale and efficiency. Absenteeism also dropped significantly, with workers feeling more recharged and motivated. Despite initial concerns, team collaboration improved due to better work-life balance, leading to fewer burnout cases and enhanced creativity.
   
-                  Managers, however, reported logistical challenges. Scheduling client meetings across time zones grew more complex, and meeting deadlines for large-scale projects demanded stricter planning. Some executives worried that the compressed schedule might deter potential clients who expect round-the-clock availability. Nevertheless, the overall results indicated that productivity gains often outweighed the inconveniences, suggesting that a four-day workweek could be a viable option for companies prioritizing employee well-being.`,
+                    Managers, however, reported logistical challenges. Scheduling client meetings across time zones grew more complex, and meeting deadlines for large-scale projects demanded stricter planning. Some executives worried that the compressed schedule might deter potential clients who expect round-the-clock availability. Nevertheless, the overall results indicated that productivity gains often outweighed the inconveniences, suggesting that a four-day workweek could be a viable option for companies prioritizing employee well-being.`,
         options: [
           "Employees in the pilot program reported decreased morale",
           "Executives found the four-day workweek unsustainable",
@@ -484,7 +778,7 @@ const questions = {
         question: "What can be inferred about consumer behavior from the study mentioned?",
         passage: `A major retail chain initiated a pilot study to analyze consumer responses to dynamic pricing—a strategy that adjusts product costs based on demand, time of day, or stock levels. Researchers discovered that shoppers are generally receptive to slight price fluctuations when they perceive a fair rationale behind them, such as off-peak discounts or limited promotional inventory. However, sudden or unjustified hikes in price led to customer dissatisfaction and negative reviews on social media.
   
-                  Interestingly, the data also showed that transparent communication about pricing policies can alleviate potential backlash. Stores that displayed detailed notices explaining why prices changed saw fewer complaints and, in some cases, improved customer loyalty. This suggests that while dynamic pricing can increase profit margins, it must be implemented with careful messaging to maintain consumer trust.`,
+                    Interestingly, the data also showed that transparent communication about pricing policies can alleviate potential backlash. Stores that displayed detailed notices explaining why prices changed saw fewer complaints and, in some cases, improved customer loyalty. This suggests that while dynamic pricing can increase profit margins, it must be implemented with careful messaging to maintain consumer trust.`,
         options: [
           "Consumers never react negatively to changing prices",
           "Shoppers appreciate hidden price adjustments",
@@ -512,7 +806,7 @@ const questions = {
         question: "Which aspect of the company's development is emphasized in the third paragraph?",
         passage: `Founded just five years ago, WaveAnalytics rapidly evolved from a niche data visualization tool into a comprehensive business intelligence platform. After securing multiple venture capital rounds, the company attracted top talent from leading tech firms and expanded its product suite to cater to diverse industries. Currently, WaveAnalytics software is used by major retail chains, healthcare providers, and financial institutions seeking real-time insights from large datasets.
   
-                   In the third year of operation, strategic partnerships with cloud service providers propelled WaveAnalytics into international markets. The platform’s advanced analytics and customizable dashboards garnered recognition for reducing clients’ decision-making time. Most notably, CEO Samantha Davis attributed the company's success to a corporate culture that values continual learning, encouraging employees to attend workshops and collaborate across departments. This internal ethos, combined with an outward focus on client-centric product innovation, has positioned WaveAnalytics as a formidable challenger to established industry players.`,
+                     In the third year of operation, strategic partnerships with cloud service providers propelled WaveAnalytics into international markets. The platform’s advanced analytics and customizable dashboards garnered recognition for reducing clients’ decision-making time. Most notably, CEO Samantha Davis attributed the company's success to a corporate culture that values continual learning, encouraging employees to attend workshops and collaborate across departments. This internal ethos, combined with an outward focus on client-centric product innovation, has positioned WaveAnalytics as a formidable challenger to established industry players.`,
         options: [
           "Its reliance on outdated analytics methods",
           "Its focus on hardware manufacturing",
@@ -541,7 +835,7 @@ const questions = {
         question: "Which statement can be inferred about the global textile market from paragraph 2?",
         passage: `The global textile market has seen a gradual shift towards more sustainable practices, with major brands adopting organic fabrics and water-efficient dyeing technologies. However, a recent industry report by GreenEarth Insights highlights that despite these positive developments, fast-fashion consumer habits continue to drive up overall production volumes. This paradoxical situation means that even though per-garment pollution may be decreasing, the total environmental impact remains high.
   
-                   Experts argue that genuine progress requires not just greener manufacturing methods, but also a cultural change in how consumers perceive and dispose of clothing. Overproduction leads to enormous waste in landfills and puts a strain on natural resources. While several pilot projects aim to promote recycling and circular fashion, the report concludes that a collective effort, involving retailers, policymakers, and consumers, is necessary to achieve real and lasting environmental benefits.`,
+                     Experts argue that genuine progress requires not just greener manufacturing methods, but also a cultural change in how consumers perceive and dispose of clothing. Overproduction leads to enormous waste in landfills and puts a strain on natural resources. While several pilot projects aim to promote recycling and circular fashion, the report concludes that a collective effort, involving retailers, policymakers, and consumers, is necessary to achieve real and lasting environmental benefits.`,
         options: [
           "Sustainable methods alone have completely solved pollution issues",
           "The public has stopped buying fast-fashion items",
@@ -564,11 +858,295 @@ const questions = {
             常見考點：「綠色生產 vs. 高量生產」的矛盾；要抓住整體趨勢與細節對比。
           </p>
         `
+      },
+  
+      // ===== 新增的 10 題 (id: 11 ~ 20) =====
+      {
+        id: 11,
+        question: "What is the main concern discussed in the first paragraph?",
+        passage: `In recent years, digital marketplaces have surged in popularity, allowing entrepreneurs of all sizes to reach a global customer base with minimal overhead costs. However, this rapid expansion has also led to increasing scrutiny over seller accountability and product authenticity. Many online platforms face the challenge of verifying the legitimacy of thousands of new vendors each month, raising concerns about counterfeit goods, privacy breaches, and consumer trust.
+  
+        In response, major e-commerce giants are implementing stricter onboarding procedures, including background checks and mandatory identity verification. Some have even introduced automated systems to detect fraudulent listings by analyzing pricing anomalies and suspicious seller activities. While these measures can bolster trust, critics argue they may inadvertently create barriers for small businesses lacking extensive documentation. Thus, the digital marketplace realm remains a dynamic frontier, balancing innovation with the need for robust consumer protections.`,
+        options: [
+          "Rising costs of running traditional retail stores",
+          "Decreasing global demand for online shopping",
+          "Challenges in ensuring seller authenticity and consumer trust",
+          "Opportunities for small entrepreneurs to open local shops"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文章強調數位市場擴張後，平台面臨「驗證賣家身份、假貨、隱私安全」等問題，故最大關注點是賣家真實性及消費者信任。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>scrutiny (n.) - 審查</li>
+            <li>authenticity (n.) - 真實性</li>
+            <li>counterfeit (adj.) - 偽造的</li>
+            <li>fraudulent (adj.) - 欺詐的</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益閱讀常考線上商務與信任機制，需識別「賣家核實」和「假貨」等核心議題。
+          </p>
+        `
+      },
+      {
+        id: 12,
+        question: "What is one potential downside of the automated systems mentioned?",
+        passage: `E-commerce platforms employ advanced algorithms to identify red flags associated with fraudulent seller behavior. For instance, a sudden spike or drastic reduction in product prices can trigger an investigation. Additionally, AI tools scan product descriptions for misleading keywords or repeated listings, flagging suspicious activity in real time. While these mechanisms significantly reduce scam incidents, they also risk penalizing legitimate sellers who employ aggressive promotional strategies or engage in rapid inventory turnover.
+  
+        To mitigate such risks, platforms often provide an appeal process, allowing flagged vendors to submit documentation to verify their authenticity. Nonetheless, small businesses, especially those operating on thin margins, may find it challenging to gather the extensive paperwork required to clear their names quickly. Overreliance on automated detection could potentially discourage budding entrepreneurs, affecting market diversity. Critics suggest that a hybrid approach—combining algorithmic monitoring with human oversight—would strike a better balance between security and inclusivity.`,
+        options: [
+          "They allow scammers to operate freely without detection",
+          "They heavily rely on human input rather than algorithms",
+          "They could unjustly penalize legitimate sellers with abrupt price changes",
+          "They ignore seller-provided documentation entirely"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>系統可能因「價格變動過大」等行銷策略誤判，導致誠實賣家受罰。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>flag (v.) - 標記、警示</li>
+            <li>turnover (n.) - (庫存)周轉率；(人員)流動率</li>
+            <li>margins (n.) - 利潤空間</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            注意「演算法優勢與弊端」是多益常見考題，尤其關於「誤罰」或「誤封」是熱門議題。
+          </p>
+        `
+      },
+      {
+        id: 13,
+        question: "Which statement is best supported by the data on employee engagement mentioned in the passage?",
+        passage: `A multinational electronics firm conducted a comprehensive survey assessing employee engagement across its various global branches. Results indicated that offices with proactive management styles and ample professional development opportunities scored significantly higher in job satisfaction. Furthermore, locations where employees felt empowered to voice concerns without retaliation showed a 25% increase in overall productivity metrics.
+  
+        Despite these positive correlations, the report highlighted notable discrepancies: some regional branches struggled to implement open-door policies due to cultural norms or hierarchical structures. Additionally, limited training budgets constrained career advancement, particularly in emerging markets. Analysts suggest that bridging these gaps will be crucial for maintaining cohesive corporate values and reducing turnover, which can otherwise cost the firm millions in recruitment and onboarding expenses.`,
+        options: [
+          "Employees are generally less productive in branches with open-door policies",
+          "Providing career development and open communication enhances employee satisfaction",
+          "Cultural norms have no effect on engagement levels",
+          "Limiting training budgets has no impact on turnover"
+        ],
+        correctAnswer: 1,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文章指出「職業發展機會」和「員工能夠暢所欲言」與高滿意度及生產力正相關。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>engagement (n.) - 參與度、投入度</li>
+            <li>hierarchical (adj.) - 階層制的</li>
+            <li>turnover (n.) - 人員流動率</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            TOEIC 閱讀常見「員工滿意度」研究；要注意具體措施（開放式政策、專業培訓）與其影響。
+          </p>
+        `
+      },
+      {
+        id: 14,
+        question: "Why does the report suggest a hybrid office model could be advantageous?",
+        passage: `With the global pandemic reshaping work environments, a growing number of companies are adopting hybrid office models, where employees split their time between remote work and on-site collaboration. According to a recent consultancy report, this approach not only reduces operational costs but also provides flexibility that can improve employee morale. By leveraging digital tools, teams can maintain effective communication and real-time project tracking.
+  
+        However, some challenges persist. For instance, remote workers may feel isolated if not given adequate support or clear performance metrics. Meanwhile, on-site teams might struggle to coordinate schedules across different time zones and work styles. The report concludes that while the hybrid model strikes a balance between autonomy and face-to-face interaction, companies must invest in robust infrastructure and supportive management practices to maximize the benefits. This includes offering professional development courses tailored for remote work and setting transparent guidelines for team coordination.`,
+        options: [
+          "It simplifies all scheduling conflicts without any infrastructure costs",
+          "It eliminates the need for on-site interactions altogether",
+          "It can lower expenses while improving overall employee satisfaction",
+          "It only benefits companies with a small workforce"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>報告指出混合辦公能減少成本並提高員工士氣，但需良好基礎設施與管理配合。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>hybrid office model - 混合辦公模式</li>
+            <li>autonomy (n.) - 自主性</li>
+            <li>infrastructure (n.) - 基礎設施</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            「混合辦公」相關文章在多益閱讀中常考，需掌握優勢、挑戰與必要條件。
+          </p>
+        `
+      },
+      {
+        id: 15,
+        question: "Which factor is highlighted as a key driver for the new tourism trends?",
+        passage: `Tourism boards worldwide have noticed a marked shift in traveler preferences. Instead of typical sightseeing tours in metropolitan hotspots, tourists are increasingly seeking immersive cultural experiences, wellness retreats, and ecologically responsible accommodations. Industry analysts attribute this change partly to social media influencers who share personal narratives and authentic local interactions, enticing followers to explore off-the-beaten-path destinations.
+  
+        Moreover, the impact of growing environmental awareness cannot be underestimated. Many travelers consciously select eco-friendly lodgings that implement solar energy, rainwater harvesting, or sustainable waste management. Government authorities in popular regions now impose stricter guidelines on resorts to protect local habitats and minimize ecological footprints. This synergy between consumer demand and regulatory measures suggests a future where sustainable tourism is not just a niche segment but a mainstream expectation.`,
+        options: [
+          "A decline in global environmental consciousness",
+          "A surge in low-cost travel options worldwide",
+          "An increased desire for experiential and sustainable travel",
+          "A preference for traditional guided city tours"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文章強調旅客轉向「深度文化體驗、養生、環保住宿」等趨勢，驅動力包括社群媒體與環保意識提升。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>immersive (adj.) - 身臨其境的</li>
+            <li>off-the-beaten-path (adj.) - 非主流的、不尋常的</li>
+            <li>rainwater harvesting (n.) - 雨水收集</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益閱讀常出現「旅遊產業趨勢」文章，須留意影響旅客行為的多重因素。
+          </p>
+        `
+      },
+      {
+        id: 16,
+        question: "What can be inferred about the collaboration between the robotics start-up and the automotive manufacturer?",
+        passage: `ZenMech Robotics recently entered a strategic partnership with NovaDrive, a leading automotive manufacturer, to develop autonomous assembly line technologies. By integrating ZenMech's cutting-edge robotic arms and NovaDrive's production expertise, the two companies aim to reduce human error, accelerate manufacturing speed, and enhance workplace safety. Prototypes demonstrated a 30% reduction in assembly time and a notable decrease in material waste.
+  
+        Despite these advancements, engineers face persistent challenges in synchronizing complex robotic operations with existing factory layouts. Additionally, labor unions have voiced concerns about potential job displacement, urging both companies to commit to reskilling initiatives. If successfully implemented, however, this collaboration could set a new standard for smart manufacturing, potentially reshaping the industry on a global scale.`,
+        options: [
+          "They plan to eliminate all labor unions in existing factories",
+          "They aim to integrate advanced robotics to improve manufacturing efficiency",
+          "They are scaling back on automation due to high error rates",
+          "They intend to reduce the safety measures currently in place"
+        ],
+        correctAnswer: 1,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文中指出兩家公司合作研發自動化生產技術，以降低人為錯誤並加速生產。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>autonomous assembly line - 自動化生產線</li>
+            <li>prototype (n.) - 原型</li>
+            <li>displacement (n.) - 取代</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            此類文章常考「技術合作目的」與「對人力的影響」。勞工議題也是多益重點。
+          </p>
+        `
+      },
+      {
+        id: 17,
+        question: "Which reason best explains why some branches struggled with supply chain issues?",
+        passage: `Magnus Foods, a global distributor of packaged snack products, revealed in its latest quarterly report that certain branches experienced prolonged shipping delays and production bottlenecks. Contributing factors include fluctuating commodity prices, tighter border regulations, and inconsistent quality from third-party suppliers. In some cases, raw materials like cocoa and almonds were held up due to increased inspection protocols aimed at ensuring safety standards.
+  
+        Compounding these challenges, sudden spikes in consumer demand for healthier snack alternatives meant that plants using newly-sourced organic ingredients lacked robust vendor networks. Consequently, the company had to scramble for secondary suppliers to maintain production schedules. Executives acknowledge that while overall sales remain strong, localized disruptions can jeopardize brand reliability. The report emphasizes the need for agile contingency planning and diversified sourcing strategies moving forward.`,
+        options: [
+          "They focused solely on local suppliers without expanding globally",
+          "They used the same strategies as their competitors",
+          "They encountered stricter regulations, inconsistent suppliers, and sudden demand changes",
+          "They had an abundance of raw materials but no buyers"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文中提到「法規更嚴、供應商不穩、需求暴增」等原因，導致供應鏈中斷和生產延誤。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>bottleneck (n.) - 瓶頸</li>
+            <li>inspection protocol (n.) - 檢驗程序</li>
+            <li>contingency planning - 應急計畫</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            供應鏈與生產延誤是多益熱門情境，考生需抓住造成延誤的「多重因素」。
+          </p>
+        `
+      },
+      {
+        id: 18,
+        question: "Which conclusion can be drawn about the company's sustainability policy?",
+        passage: `EcoMarine Cargo Solutions has long prided itself on its green policies, claiming a 40% reduction in carbon emissions over the past five years. However, an independent audit revealed inconsistencies in their offshore shipping routes, suggesting that actual emissions might be higher than reported. While the company did invest in cleaner fuel alternatives for its fleet, the audit indicates that inefficient route planning offset much of the environmental benefit.
+  
+        In light of these findings, EcoMarine announced a partnership with an AI-based logistics platform to optimize navigation paths and improve tracking of fuel consumption. The executive team also pledged greater transparency by releasing quarterly updates verified by a third party. Although critics question whether these measures can swiftly rectify past discrepancies, experts note that EcoMarine's open acknowledgment of shortcomings is a step toward genuine accountability.`,
+        options: [
+          "EcoMarine has fully resolved all emission-related issues",
+          "The audit proved that EcoMarine never reduced emissions",
+          "Inefficient route planning undermined some of EcoMarine’s sustainability efforts",
+          "EcoMarine refuses to work with third-party auditors"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>審核報告顯示，雖公司採用較潔淨燃料，但路線規劃不當使減排效果打折扣。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>offset (v.) - 抵消</li>
+            <li>discrepancy (n.) - 出入、差異</li>
+            <li>accountability (n.) - 問責、負責</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益考「公司聲稱 vs. 審核結果」的對比，重點在「實際效益與聲明不符」。
+          </p>
+        `
+      },
+      {
+        id: 19,
+        question: "Why have some local business owners opposed the construction of a new resort?",
+        passage: `In an effort to attract foreign visitors, the Lakeshore City Council approved plans for a new luxury resort near the iconic lakefront. Proponents of the project argue it will bolster the local economy by creating jobs and modernizing recreational facilities. However, many small business owners remain skeptical, fearing that the massive development could overshadow family-run establishments and inflate property values.
+  
+        Furthermore, environmental groups have expressed concerns about disrupting the lake's fragile ecosystem. Dredging activities required for the resort's marina could alter water quality, affecting local fisheries. While the council insists that they will enforce stringent environmental guidelines, activists demand comprehensive impact assessments. With public opinion divided, the city must weigh economic gains against potential social and ecological repercussions.`,
+        options: [
+          "They believe it will significantly improve the local environment",
+          "They expect it to create more affordable housing for residents",
+          "They are worried that the resort will overshadow smaller businesses and raise property costs",
+          "They plan to run new eco-tours in partnership with the resort"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>文中提到小商家擔心大型度假村出現後，會蓋過自家生意並推高房價。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>dredging (n.) - 疏浚</li>
+            <li>marina (n.) - 遊艇碼頭</li>
+            <li>repercussion (n.) - 後果、影響</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            城市開發類文章常聚焦「經濟效益 vs. 在地商家與環境影響」，是多益閱讀常見的矛盾情境。
+          </p>
+        `
+      },
+      {
+        id: 20,
+        question: "What common theme do the examples in paragraph 2 illustrate?",
+        passage: `A growing body of evidence suggests that a lack of cross-departmental collaboration can stifle innovation, no matter how talented individual teams may be. For instance, in a large pharmaceutical firm, the research division developed groundbreaking compounds but failed to communicate their potential applications to the marketing and distribution branches. Consequently, promising products languished in late-stage trials without commercial support.
+  
+        Similarly, a tech startup boasting an impressive coding team launched a platform with cutting-edge features, yet the user interface remained unintuitive due to insufficient input from the design department. In both cases, the absence of integrated feedback loops inhibited timely refinements and undermined final outcomes. Experts argue that fostering a culture of transparency and routine inter-team evaluations is vital for converting specialized expertise into market-ready innovations.`,
+        options: [
+          "They highlight the benefits of isolated departmental efforts",
+          "They demonstrate how separate teams excel independently",
+          "They show that poor inter-team communication harms product success",
+          "They prove that design alone determines a product’s fate"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>兩個例子（製藥公司、科技新創）都說明部門間缺乏溝通導致商業化與產品體驗失敗。</p>
+          <h4>重要單字：</h4>
+          <ul>
+            <li>languish (v.) - 被忽視、受冷落</li>
+            <li>feedback loop (n.) - 回饋迴路</li>
+            <li>stifle (v.) - 抑制</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>
+            多益閱讀常考「跨部門協作」的重要性。需看清「成功或失敗」背後原因，通常與溝通有關。
+          </p>
+        `
       }
     ],
   
     // ================== 語法 (Grammar) ==================
     grammar: [
+      // ===== 原本的 10 題 (id: 1 ~ 10) =====
       {
         id: 1,
         question: "Select the correct form: Had it not been for the unexpected delay, ____ .",
@@ -779,7 +1357,225 @@ const questions = {
           <h4>學習重點：</h4>
           <p>多益語法常考第三條件句：If you had V-ed, you would have V-ed.</p>
         `
+      },
+  
+      // ===== 新增的 10 題 (id: 11 ~ 20) =====
+      {
+        id: 11,
+        question: "Which sentence correctly uses inversion for emphasis?",
+        options: [
+          "Never have I seen such a dedicated team in all my years of management.",
+          "Never I have seen such a dedicated team in all my years of management.",
+          "Never seen I have such a dedicated team in all my years of management.",
+          "I never have seen such a dedicated team in all my years of management."
+        ],
+        correctAnswer: 0,
+        explanation: `
+          <h4>解析：</h4>
+          <p>強調副詞（Never）置於句首須進行倒裝："Never have I seen..."。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>inversion (n.) - 倒裝</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益中常考「否定副詞 + 倒裝」：Never/Seldom/Rarely + 助動詞/be + 主詞 + 動詞。</p>
+        `
+      },
+      {
+        id: 12,
+        question: "Complete the sentence with correct subjunctive form: The board demands that every team member ____ the new security protocol.",
+        options: [
+          "implement",
+          "implements",
+          "will implement",
+          "implemented"
+        ],
+        correctAnswer: 0,
+        explanation: `
+          <h4>解析：</h4>
+          <p>動詞 demand + that 子句使用虛擬語氣，需用原形動詞 "implement"。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>demand (v.) - 要求</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>同類常考動詞：suggest, insist, recommend, propose 等 + that + S + V原形。</p>
+        `
+      },
+      {
+        id: 13,
+        question: "Identify the grammatically correct sentence:",
+        options: [
+          "Had the client accepted our offer, we would now sign the contract.",
+          "Had the client accept our offer, we would now sign the contract.",
+          "If the client accepts our offer, we would have signed the contract.",
+          "Had the client accepted our offer, we would now be signing the contract."
+        ],
+        correctAnswer: 3,
+        explanation: `
+          <h4>解析：</h4>
+          <p>本句使用條件倒裝表示「過去與現在的虛擬」，客戶若過去接受，現在正要簽約。正確用法：Had + S + p.p. → would + now be V-ing。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>conditional inversion - 條件倒裝</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>注意混合條件句：過去動作影響現在結果的結構。</p>
+        `
+      },
+      {
+        id: 14,
+        question:
+          "Choose the best sentence that correctly uses a complex relative clause with a preposition at the end:",
+        options: [
+          "The contract which we agreed upon it last week is now invalid.",
+          "The contract which we agreed upon last week is now invalid.",
+          "The contract upon which we agreed last week it is now invalid.",
+          "The contract that upon we agreed last week is now invalid."
+        ],
+        correctAnswer: 1,
+        explanation: `
+          <h4>解析：</h4>
+          <p>"agree upon something" 是常見搭配，而關係代名詞在此可用 "which"；句末介係詞 "upon" 正確保留。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>agree upon - 達成共識</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>英語允許在口語或不太正式的文體中將介係詞置於句尾，但必須刪除重複的代名詞。</p>
+        `
+      },
+      {
+        id: 15,
+        question: "Which sentence demonstrates a correct use of the present perfect continuous tense?",
+        options: [
+          "We have been discuss this issue for over an hour.",
+          "We have discussing this issue for over an hour.",
+          "We have been discussing this issue for over an hour.",
+          "We had been discussing this issue for over an hour."
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>現在完成進行式結構為 have/has + been + V-ing。故正解是 "We have been discussing..."。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>present perfect continuous - 現在完成進行式</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益中可能測時態一致性，"for + 時段" 常搭配完成或完成進行式。</p>
+        `
+      },
+      {
+        id: 16,
+        question:
+          "Select the correct form in this sentence: If our competitors lower their prices, we ____ in trouble unless we adjust our strategy.",
+        options: [
+          "would be",
+          "were",
+          "will be",
+          "would have been"
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>此為第一條件句（與未來可能發生的情況相符）：If + 現在式 → will + 原形。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>adjust (v.) - 調整</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益中第一條件句：「If + 現在式，主詞 + will + V」。表「未來可能」情境。</p>
+        `
+      },
+      {
+        id: 17,
+        question: "Which sentence uses the causative form correctly?",
+        options: [
+          "We got our legal team reviewing the document carefully.",
+          "We had our legal team to review the document carefully.",
+          "We had our legal team review the document carefully.",
+          "We have been our legal team reviewed the document."
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>使役動詞 have + 受詞 + 原形動詞："We had our legal team review the document."</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>causative (adj.) - 使役的</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益常考 "have/make/let + 受詞 + 原形動詞" 的結構。</p>
+        `
+      },
+      {
+        id: 18,
+        question:
+          "Which sentence correctly uses a future perfect tense to indicate an action completed before another future event?",
+        options: [
+          "By next month, we have completed the software update.",
+          "By next month, we had completed the software update.",
+          "By next month, we will have completed the software update.",
+          "By next month, we will be completing the software update."
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>未來完成式：will have + p.p.，表示在未來某個時間點前完成。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>future perfect - 未來完成式</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益時態題常考「by + 未來時間」，用「will have + p.p.」。</p>
+        `
+      },
+      {
+        id: 19,
+        question: "Which option includes a correctly used appositive phrase?",
+        options: [
+          "Mr. Wang, our chief financial officer, will announce the new budget tomorrow.",
+          "Mr. Wang our chief financial officer will announce, the new budget tomorrow.",
+          "Mr. Wang our chief financial officer will announce the new budget, tomorrow.",
+          "Mr. Wang, our chief financial officer will announce the new budget tomorrow."
+        ],
+        correctAnswer: 0,
+        explanation: `
+          <h4>解析：</h4>
+          <p>同位語用逗號前後隔開，正確句型："Mr. Wang, our chief financial officer, will announce..."。</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>appositive (n.) - 同位語</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>同位語修飾主詞時需用逗號隔開；多益常考商業職位等同位語。</p>
+        `
+      },
+      {
+        id: 20,
+        question: "Identify the sentence that uses the correct sequence of tenses:",
+        options: [
+          "I realized that if you miss the deadline, you will pay the penalty.",
+          "I realize that if you missed the deadline, you would pay the penalty.",
+          "I realized that if you missed the deadline, you would pay the penalty.",
+          "I realize that if you miss the deadline, you would pay the penalty."
+        ],
+        correctAnswer: 2,
+        explanation: `
+          <h4>解析：</h4>
+          <p>過去式主句 + 假設語氣：若過去錯過截止日期，則會承擔後果 → "I realized (past) that if you missed (past) the deadline, you would pay (過去助動詞) the penalty."</p>
+          <h4>重要單字 / 短語：</h4>
+          <ul>
+            <li>sequence of tenses - 時態一致性</li>
+          </ul>
+          <h4>學習重點：</h4>
+          <p>多益常考主句與條件句時態相互對應：主句 past，條件句 past → 結果子句 would + V。</p>
+        `
       }
     ]
   };
+  
+  // 輸出完整的 questions 物件
+  console.log(questions);
   
