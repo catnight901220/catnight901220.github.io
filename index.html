@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>多益考試練習系統 - 增強體驗</title>
+
+  <style>
+    :root {
+      --primary-color: #2196f3;
+      --secondary-color: #4caf50;
+      --error-color: #f44336;
+      --success-color: #4caf50;
+      --text-color: #333;
+      --bg-color: #f5f5f5;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Microsoft JhengHei', sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--primary-color), #1976d2);
+      color: white;
+      border-radius: 10px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: var(--secondary-color);
+      transition: width 0.3s ease;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      background-color: white;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .question {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary-color);
+      opacity: 0;
+      animation: fadeInQuestion 0.8s forwards;
+    }
+
+    @keyframes fadeInQuestion {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .option {
+      margin: 10px 0;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0;
+      animation: fadeInOption 0.8s forwards;
+    }
+
+    /* 讓選項分批出現 */
+    .option:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .option:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    .option:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    .option:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeInOption {
+      0% { opacity: 0; transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+      border-color: var(--primary-color);
+      transform: translateX(5px);
+    }
+
+    .selected {
+      background-color: #e3f2fd;
+      border-color: var(--primary-color);
+    }
+
+    .correct {
+      background-color: #c8e6c9;
+      border-color: var(--success-color);
+      animation: correctPulse 0.4s 2;
+    }
+    @keyframes correctPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .incorrect {
+      background-color: #ffcdd2;
+      border-color: var(--error-color);
+      animation: shake 0.6s;
+    }
+
+    /* 錯誤時搖晃 */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .audio-controls {
+      margin: 15px 0;
+      padding: 15px;
+      background-color: #e3f2fd;
+      border-radius: 8px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .play-button {
+      background-color: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .play-button:hover {
+      background-color: #45a049;
+    }
+
+    .explanation {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #fff3e0;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .explanation.show {
+      display: block;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+    }
+
+    .primary-button {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .primary-button:hover {
+      background-color: #1976d2;
+    }
+
+    .secondary-button {
+      background-color: #e0e0e0;
+      color: var(--text-color);
+    }
+
+    .secondary-button:hover {
+      background-color: #bdbdbd;
+    }
+
+    .error-message, .status-message {
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .error-message {
+      background-color: #ffebee;
+      color: var(--error-color);
+    }
+
+    .status-message {
+      background-color: #e8f5e9;
+      color: var(--success-color);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .timer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close-button {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .passage {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-color);
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .passage p {
+      margin: 0;
+      color: var(--text-color);
+    }
+
+    .progress-info {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .section-progress {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px 0;
+    }
+
+    .reset-button {
+      background-color: var(--error-color);
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .reset-button:hover {
+      background-color: #d32f2f;
+    }
+
+    /* 淡入動畫 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="timer" id="timer">時間: 00:00</div>
+
+  <div class="container">
+    <div class="header">
+      <h1>多益考試練習系統 - 增強版</h1>
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value" id="correct-count">0</div>
+          <div>正確</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="total-count">0</div>
+          <div>總題數</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="accuracy">0%</div>
+          <div>正確率</div>
+        </div>
+      </div>
+      <div class="progress-info">
+        <p>已完成題目：</p>
+        <div class="section-progress">
+          <span>聽力：<span id="listening-progress">0</span>/<span id="listening-total">0</span></span>
+          <span>閱讀：<span id="reading-progress">0</span>/<span id="reading-total">0</span></span>
+          <span>語法：<span id="grammar-progress">0</span>/<span id="grammar-total">0</span></span>
+        </div>
+        <button onclick="resetProgress()" class="reset-button">重置進度</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>聽力練習</h2>
+      <div id="listening-question" class="question">
+        <!-- 聽力題目將由 JavaScript 動態載入 -->
+      </div>
+      <div id="listening-error" class="error-message"></div>
+      <div id="listening-status" class="status-message"></div>
+    </div>
+
+    <div class="section">
+      <h2>閱讀練習</h2>
+      <div id="reading-question" class="question">
+        <!-- 閱讀題目將由 JavaScript 動態載入 -->
+      </div>
+      <div id="reading-error" class="error-message"></div>
+      <div id="reading-status" class="status-message"></div>
+    </div>
+
+    <div class="section">
+      <h2>語法練習</h2>
+      <div id="grammar-question" class="question">
+        <!-- 語法題目將由 JavaScript 動態載入 -->
+      </div>
+      <div id="grammar-error" class="error-message"></div>
+      <div id="grammar-status" class="status-message"></div>
+    </div>
+  </div>
+
+  <!-- 詳細解析的彈窗 -->
+  <div id="explanation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeExplanation()">&times;</span>
+      <h3>詳細解析</h3>
+      <div id="explanation-content"></div>
+    </div>
+  </div>
+
+  <!-- 先載入題庫檔案 -->
+  <script src="questions.js"></script>
+
+  <!-- 再載入主邏輯程式碼 -->
+  <script>
+    /****************************************************************
+     * 1) 全域變數：進度與統計
+     ****************************************************************/
+    let currentQuestions = {
+      listening: 1,
+      reading: 1,
+      grammar: 1
+    };
+
+    let completedQuestions = {
+      listening: [],
+      reading: [],
+      grammar: []
+    };
+
+    let stats = {
+      correct: 0,
+      total: 0
+    };
+
+    let startTime = new Date();
+    let timerInterval;
+
+    /****************************************************************
+     * 2) 計時器
+     ****************************************************************/
+    function updateTimer() {
+      const now = new Date();
+      const diff = Math.floor((now - startTime) / 1000);
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+      document.getElementById('timer').textContent =
+          `時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    /****************************************************************
+     * 3) 顯示統計＆進度
+     ****************************************************************/
+    function updateStats() {
+      document.getElementById('correct-count').textContent = stats.correct;
+      document.getElementById('total-count').textContent = stats.total;
+      const accuracy = stats.total > 0
+        ? Math.round((stats.correct / stats.total) * 100)
+        : 0;
+      document.getElementById('accuracy').textContent = `${accuracy}%`;
+    }
+
+    function updateProgress() {
+      // 更新各部分的進度
+      document.getElementById('listening-progress').textContent = completedQuestions.listening.length;
+      document.getElementById('reading-progress').textContent = completedQuestions.reading.length;
+      document.getElementById('grammar-progress').textContent = completedQuestions.grammar.length;
+
+      // 更新總題數
+      document.getElementById('listening-total').textContent = questions.listening.length;
+      document.getElementById('reading-total').textContent = questions.reading.length;
+      document.getElementById('grammar-total').textContent = questions.grammar.length;
+
+      // 更新進度條
+      const totalQuestions = questions.listening.length +
+                             questions.reading.length +
+                             questions.grammar.length;
+      const completedTotal = completedQuestions.listening.length +
+                             completedQuestions.reading.length +
+                             completedQuestions.grammar.length;
+      const progress = (completedTotal / totalQuestions) * 100;
+      document.getElementById('progress').style.width = `${progress}%`;
+    }
+
+    /****************************************************************
+     * 4) 本地存儲
+     ****************************************************************/
+    function saveProgress() {
+      localStorage.setItem('toeicProgress', JSON.stringify({
+        completedQuestions,
+        currentQuestions,
+        stats
+      }));
+    }
+
+    function loadProgress() {
+      const savedData = localStorage.getItem('toeicProgress');
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        completedQuestions = data.completedQuestions || { listening: [], reading: [], grammar: [] };
+        currentQuestions = data.currentQuestions || { listening: 1, reading: 1, grammar: 1 };
+        stats = data.stats || { correct: 0, total: 0 };
+      }
+    }
+
+    /****************************************************************
+     * 5) 詳細解析的彈窗
+     ****************************************************************/
+    function showExplanation(explanation) {
+      if (!explanation) return;
+      const modal = document.getElementById('explanation-modal');
+      const content = document.getElementById('explanation-content');
+      content.innerHTML = explanation;
+      modal.style.display = 'block';
+    }
+
+    function closeExplanation() {
+      document.getElementById('explanation-modal').style.display = 'none';
+    }
+
+    /****************************************************************
+     * 6) 語音功能
+     ****************************************************************/
+    let speechSynth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    const voicesConfig = {
+      male: {
+        name: 'Microsoft David - English (United States)',
+        pitch: 0.9,
+        rate: 0.9
+      },
+      female: {
+        name: 'Microsoft Zira - English (United States)',
+        pitch: 1.1,
+        rate: 0.9
+      }
+    };
+
+    function getVoice(speaker) {
+      const voiceSettings = voicesConfig[speaker] || voicesConfig.male;
+      const availableVoices = speechSynth.getVoices();
+      let voice = availableVoices.find(v => v.name === voiceSettings.name);
+      if (!voice) {
+        voice = availableVoices[0];
+      }
+      return {
+        voice: voice,
+        pitch: voiceSettings.pitch,
+        rate: voiceSettings.rate
+      };
+    }
+
+    function speak(text, speaker = 'male') {
+      try {
+        if (currentUtterance) {
+          speechSynth.cancel();
+        }
+        const voiceSettings = getVoice(speaker);
+        currentUtterance = new SpeechSynthesisUtterance(text);
+        currentUtterance.voice = voiceSettings.voice;
+        currentUtterance.lang = 'en-US';
+        currentUtterance.rate = voiceSettings.rate;
+        currentUtterance.pitch = voiceSettings.pitch;
+        currentUtterance.onerror = function() {
+          showError('listening', '語音播放失敗，請檢查瀏覽器設定或重新整理頁面');
+        };
+        speechSynth.speak(currentUtterance);
+        showStatus('listening', '正在播放音訊...');
+      } catch (error) {
+        showError('listening', '您的瀏覽器可能不支援語音功能，請使用最新版的 Chrome 或 Edge。');
+      }
+    }
+
+    /****************************************************************
+     * 7) 提示訊息顯示
+     ****************************************************************/
+    function showError(section, message) {
+      const errorDiv = document.getElementById(`${section}-error`);
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      setTimeout(() => {
+        errorDiv.style.display = 'none';
+      }, 3000);
+    }
+
+    function showStatus(section, message) {
+      const statusDiv = document.getElementById(`${section}-status`);
+      statusDiv.textContent = message;
+      statusDiv.style.display = 'block';
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 3000);
+    }
+
+    /****************************************************************
+     * 8) 題目顯示 & 作答邏輯
+     ****************************************************************/
+    function findQuestion(section, questionId) {
+      return questions[section].find(q => q.id === questionId);
+    }
+
+    function isCompleted(section, id) {
+      return completedQuestions[section].includes(id);
+    }
+
+    function getNextQuestionId(section) {
+      const allIds = questions[section].map(q => q.id);
+      for (let id of allIds) {
+        if (!isCompleted(section, id)) {
+          return id;
+        }
+      }
+      return null;
+    }
+
+    function displayQuestion(section) {
+      const nextId = getNextQuestionId(section);
+      if (nextId === null) {
+        document.getElementById(`${section}-question`).innerHTML =
+          '<p>此部分所有題目已完成！請重置進度或等待新題目更新。</p>';
+        return;
+      }
+
+      currentQuestions[section] = nextId;
+      const question = findQuestion(section, nextId);
+      if (!question) {
+        showError(section, '無法載入題目，請重新整理頁面');
+        return;
+      }
+
+      let html = `<p>Question ${question.id}: ${question.question}</p>`;
+
+      // 聽力題目
+      if (section === 'listening' && question.audioText) {
+        html += `
+          <div class="audio-controls">
+            <button class="play-button"
+              onclick="speak('${question.audioText.replace(/'/g, "\\'")}', '${question.speaker}')">
+              播放音訊
+            </button>
+          </div>
+        `;
+      }
+      // 閱讀題目
+      else if (section === 'reading' && question.passage) {
+        html += `
+          <div class="passage">
+            <p>${question.passage}</p>
+          </div>
+        `;
+      }
+
+      // 選項
+      question.options.forEach((option, index) => {
+        html += `
+          <div class="option" onclick="selectAnswer('${section}', ${index})">
+            ${String.fromCharCode(65 + index)}) ${option}
+          </div>
+        `;
+      });
+
+      html += `<button onclick="submitAnswer('${section}')">提交答案</button>`;
+      document.getElementById(`${section}-question`).innerHTML = html;
+      saveProgress();
+    }
+
+    function selectAnswer(section, answerIndex) {
+      const container = document.getElementById(`${section}-question`);
+      const options = container.getElementsByClassName('option');
+      for (let option of options) {
+        option.classList.remove('selected');
+      }
+      options[answerIndex].classList.add('selected');
+    }
+
+    function submitAnswer(section) {
+      const container = document.getElementById(`${section}-question`);
+      const options = container.getElementsByClassName('option');
+      const selectedOption = container.querySelector('.selected');
+      if (!selectedOption) {
+        showError(section, '請選擇一個答案！');
+        return;
+      }
+
+      const selectedIndex = Array.from(options).indexOf(selectedOption);
+      const questionId = currentQuestions[section];
+      const question = findQuestion(section, questionId);
+      if (!question) {
+        showError(section, '找不到題目！');
+        return;
+      }
+
+      const isCorrect = (selectedIndex === question.correctAnswer);
+      stats.total++;
+      if (isCorrect) {
+        stats.correct++;
+        showStatus(section, '答對了！');
+      } else {
+        showStatus(section, '答錯了，請繼續努力！');
+      }
+
+      // 加入已完成
+      if (!completedQuestions[section].includes(questionId)) {
+        completedQuestions[section].push(questionId);
+      }
+
+      updateStats();
+      updateProgress();
+      saveProgress();
+
+      selectedOption.classList.remove('selected');
+      selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+      // 顯示解析（若有）
+      if (question.explanation) {
+        showExplanation(question.explanation);
+      }
+
+      // 短暫延遲後載入下一題
+      setTimeout(() => {
+        displayQuestion(section);
+      }, 1500);
+    }
+
+    /****************************************************************
+     * 9) 重置所有進度
+     ****************************************************************/
+    function resetProgress() {
+      if (confirm('確定要重置所有進度嗎？此操作無法復原。')) {
+        try {
+          completedQuestions = {
+            listening: [],
+            reading: [],
+            grammar: []
+          };
+          currentQuestions = {
+            listening: 1,
+            reading: 1,
+            grammar: 1
+          };
+          stats = {
+            correct: 0,
+            total: 0
+          };
+          localStorage.removeItem('toeicProgress');
+          localStorage.clear();
+          alert('進度已成功重置，頁面將重新載入！');
+          window.location.reload();
+        } catch (err) {
+          console.error('重置失敗:', err);
+          alert('重置進度時發生錯誤，請嘗試重新整理頁面後再試。');
+        }
+      }
+    }
+
+    /****************************************************************
+     * 10) 初始化
+     ****************************************************************/
+    function initialize() {
+      loadProgress();
+      updateProgress();
+      updateStats();
+
+      startTime = new Date();
+      timerInterval = setInterval(updateTimer, 1000);
+
+      // 等待聲音列表載入，之後依序顯示聽力、閱讀、語法題
+      speechSynthesis.onvoiceschanged = function() {
+        ['listening', 'reading', 'grammar'].forEach(section => displayQuestion(section));
+      };
+      // 有些瀏覽器直接就有 voices
+      if (speechSynthesis.getVoices().length > 0) {
+        ['listening', 'reading', 'grammar'].forEach(section => displayQuestion(section));
+      }
+    }
+
+    window.onload = initialize;
+  </script>
+</body>
+</html>
