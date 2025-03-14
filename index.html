@@ -625,11 +625,10 @@
     }
 
     function updateConfetti() {
-      confettiParticles.forEach((p, i) => {
+      confettiParticles.forEach((p) => {
         p.tiltAngle += p.tiltAngleIncremental;
         p.y += p.speed;
         p.x += Math.sin(p.tiltAngle);
-
         p.tilt = Math.sin(p.tiltAngle) * 15;
 
         if (p.y > confettiCanvas.height) {
@@ -799,60 +798,73 @@
     }
 
     /****************************************************************
-     * 語音功能
+     * 語音功能 (改良版：自動辨別裝置可用語音，嘗試 male / female)
      ****************************************************************/
     let speechSynth = window.speechSynthesis;
     let currentUtterance = null;
 
-    const voicesConfig = {
-      male: {
-        name: 'Microsoft David - English (United States)',
-        pitch: 0.9,
-        rate: 0.9,
-      },
-      female: {
-        name: 'Microsoft Zira - English (United States)',
-        pitch: 1.1,
-        rate: 0.9,
-      },
-    };
+    /**
+     * 從瀏覽器可用的 voices 中，盡量匹配男或女聲
+     * 若找不到，就回退到 voices[0]
+     */
+    function getBestVoice(speaker = 'male') {
+      const voices = speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return null;
 
-    function getVoice(speaker) {
-      const voiceSettings = voicesConfig[speaker] || voicesConfig.male;
-      const availableVoices = speechSynth.getVoices();
-      let voice = availableVoices.find((v) => v.name === voiceSettings.name);
-      if (!voice) {
-        voice = availableVoices[0];
+      // 常見關鍵字 (可自行擴充)
+      const maleKeywords = ['male', 'man', 'david', 'alex', 'fred', 'daniel', 'google us english'];
+      const femaleKeywords = ['female', 'woman', 'zira', 'samantha', 'victoria', 'alice', 'google uk english female'];
+
+      const wantedKeywords = (speaker === 'male') ? maleKeywords : femaleKeywords;
+      let bestVoice = null;
+
+      for (let v of voices) {
+        const nameLang = (v.name + ' ' + v.lang).toLowerCase();
+        if (wantedKeywords.some(kw => nameLang.includes(kw))) {
+          bestVoice = v;
+          break;
+        }
       }
-      return {
-        voice: voice,
-        pitch: voiceSettings.pitch,
-        rate: voiceSettings.rate,
-      };
+
+      if (!bestVoice) {
+        bestVoice = voices[0];
+      }
+      return bestVoice;
     }
 
+    /**
+     * 播放 TTS 語音
+     * @param {string} text - 要播放的文字
+     * @param {string} speaker - 'male' / 'female'，預設 'male'
+     */
     function speak(text, speaker = 'male') {
-      try {
-        if (currentUtterance) {
-          speechSynth.cancel();
-        }
-        const voiceSettings = getVoice(speaker);
-        currentUtterance = new SpeechSynthesisUtterance(text);
-        currentUtterance.voice = voiceSettings.voice;
-        currentUtterance.lang = 'en-US';
-        currentUtterance.rate = voiceSettings.rate;
-        currentUtterance.pitch = voiceSettings.pitch;
-        currentUtterance.onerror = function () {
-          showError('listening', '語音播放失敗，請檢查瀏覽器設定或重新整理頁面');
-        };
-        speechSynth.speak(currentUtterance);
-        showStatus('listening', '正在播放音訊...');
-      } catch (error) {
-        showError(
-          'listening',
-          '您的瀏覽器可能不支援語音功能，請使用最新版的 Chrome 或 Edge。'
-        );
+      if (!window.speechSynthesis) {
+        console.error('此瀏覽器不支援 SpeechSynthesis API。');
+        return;
       }
+
+      // 取得語音
+      const bestVoice = getBestVoice(speaker);
+      if (!bestVoice) {
+        console.warn('未能取得合適的語音，請檢查瀏覽器 / 裝置是否支援。');
+        return;
+      }
+
+      // 取消當前正在播放的音訊
+      speechSynthesis.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.voice = bestVoice;
+      // 可根據喜好調整
+      utter.pitch = 1.0;
+      utter.rate = 1.0;
+
+      utter.onerror = (err) => {
+        console.error('TTS 播放錯誤:', err);
+      };
+
+      // 實際播放
+      speechSynthesis.speak(utter);
     }
 
     /****************************************************************
@@ -1073,9 +1085,11 @@
 
       // 等待聲音列表載入後，再載入題目
       speechSynthesis.onvoiceschanged = function () {
+        console.log('Voices loaded:', speechSynthesis.getVoices());
         ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       };
-      // 有些瀏覽器 getVoices() 可能馬上有值
+
+      // 某些瀏覽器 getVoices() 可能馬上有值
       if (speechSynthesis.getVoices().length > 0) {
         ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       }
