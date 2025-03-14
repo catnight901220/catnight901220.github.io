@@ -1,4 +1,15 @@
-const questions = {
+/**
+ * questions.js
+ * 
+ * 1. 使用 IIFE (立即執行函式)。
+ * 2. 將原本的 questions 物件，改為 push 到 window.questionSets。
+ */
+(function () {
+  // 若全域陣列不存在，就先定義一個空陣列
+  window.questionSets = window.questionSets || [];
+
+  // 把本檔案的題庫物件推進 questionSets
+  window.questionSets.push({
     // ================== 聽力 (Listening) ==================
     listening: [
       // ===== 原本的 10 題 (id: 1 ~ 10) =====
@@ -286,7 +297,7 @@ const questions = {
           </p>
         `
       },
-  
+
       // ===== 新增的 10 題 (id: 11 ~ 20) =====
       {
         id: 11,
@@ -569,7 +580,7 @@ const questions = {
         `
       }
     ],
-  
+
     // ================== 閱讀 (Reading) ==================
     reading: [
       // ===== 原本的 10 題 (id: 1 ~ 10) =====
@@ -577,7 +588,7 @@ const questions = {
         id: 1,
         question: "What is the main purpose of this article?",
         passage: `In an effort to address declining consumer trust, the Global Data Privacy Summit recently convened in Brussels to discuss stricter regulations on data collection and usage. Over 500 delegates from technology firms, government agencies, and advocacy groups participated in panel discussions examining the long-term impact of unregulated data mining. The summit's keynote speaker, a leading cybersecurity expert, highlighted the urgent need for transparent corporate practices and consumer education.
-  
+
                     Conference attendees also explored emerging technologies designed to safeguard user data. Biometric authentication and end-to-end encryption were showcased as potential solutions. However, many raised concerns about the scalability of these technologies, particularly in regions with limited internet infrastructure. Despite the challenges, there was a consensus that collaboration between private and public sectors is essential to creating a balanced framework for data governance.`,
         options: [
           "To introduce a new technological device for data encryption",
@@ -606,7 +617,7 @@ const questions = {
         id: 2,
         question: "Which of the following best describes the research findings mentioned in paragraph 2?",
         passage: `A recent study conducted by the International Council on Sustainable Development has revealed that companies integrating environmentally friendly practices not only reduce their carbon footprint but also experience a surge in brand loyalty. Researchers surveyed over 10,000 consumers across 15 countries, finding that 78% were more likely to support businesses that actively reduce waste, conserve energy, or employ green manufacturing processes.
-  
+
                      Interestingly, the study also noted a significant correlation between transparent reporting of sustainability goals and increased consumer engagement. When companies publicly shared their progress on cutting emissions or minimizing plastic use, customers were more likely to engage positively on social media and recommend the brand to friends. The findings suggest that proactive environmental measures, combined with open communication, can substantially bolster a company's competitive edge in a crowded global market.`,
         options: [
           "They indicate that consumers do not value environmental policies",
@@ -626,7 +637,7 @@ const questions = {
           </ul>
           <h4>學習重點：</h4>
           <p>
-            多益閱讀中常考「調查結果」及「因果關係」。此段落重點是「環保措施 → 增加品牌忠誠度」。
+            文章提到環保措施可帶動顧客忠誠度，是「環保」和「品牌忠誠」之間的正向關係。
           </p>
         `
       },
@@ -634,7 +645,7 @@ const questions = {
         id: 3,
         question: "Which statement best captures the author's attitude in the third paragraph?",
         passage: `While the recent expansion of cryptocurrency markets has garnered widespread media coverage, many analysts remain skeptical about the long-term stability of digital coins. According to financial experts, the market's rapid fluctuations—often triggered by social media sentiment—highlight a lack of regulatory oversight. This volatility raises concerns that inexperienced investors might incur substantial losses, further fueling debates on implementing stricter investor protection laws.
-  
+
                      Nevertheless, some proponents argue that digital assets represent a revolutionary shift in how financial transactions are conducted, offering decentralization and potential cost savings. The author, however, maintains a cautious stance, acknowledging both the innovative potential and the inherent risks that cryptocurrencies pose to ordinary consumers and institutional investors alike.`,
         options: [
           "Enthusiastic about the unlimited potential of cryptocurrencies",
@@ -654,7 +665,7 @@ const questions = {
           </ul>
           <h4>學習重點：</h4>
           <p>
-            TOEIC 閱讀題可能問作者態度。此處關鍵字 "cautious stance" 即表「既看好優勢，也警惕風險」。
+            TOEIC 閱讀題常問作者態度；此處關鍵字 "cautious stance" 即表示「既看好優勢，也警惕風險」。
           </p>
         `
       },
@@ -662,7 +673,7 @@ const questions = {
         id: 4,
         question: "What can be inferred from the details about the company's workforce strategy?",
         passage: `Global Tech Solutions, a multinational software provider, recently announced a robust workforce diversification plan aimed at expanding its remote and cross-functional teams. Over the past fiscal year, they have increased international hires by 40%, embracing a broader range of technical backgrounds and language proficiencies to better serve regional markets. Additionally, they have implemented flexible working arrangements, allowing employees to choose schedules that align with varying time zones and family commitments.
-  
+
                      Internal surveys show that this approach not only decreases turnover but also enhances employee satisfaction. However, some managers expressed concerns about maintaining cohesive communication among geographically dispersed teams. To address this, Global Tech Solutions has invested heavily in virtual collaboration tools and intercultural training programs. While still in its early stages, the company believes this initiative will foster a more inclusive, dynamic environment, ultimately driving innovation and global market penetration.`,
         options: [
           "Global Tech Solutions is reducing its remote workforce",
@@ -673,25 +684,23 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>文章提到部分管理者擔憂 "maintaining cohesive communication among geographically dispersed teams"。</p>
+          <p>文章提到一些管理者擔心分散團隊間的溝通問題，故溝通是一大挑戰。</p>
           <h4>重要單字：</h4>
           <ul>
-            <li>workforce diversification (n.) - 人力多元化</li>
+            <li>workforce diversification - 人力多元化</li>
             <li>turnover (n.) - 人員流動率</li>
             <li>inclusive (adj.) - 包容的</li>
             <li>market penetration (n.) - 市場滲透</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            注意 "concerns" 與 "challenges" 的對應。多益閱讀常考公司策略與其問題。
-          </p>
+          <p>跨國或遠距工作模式帶來的溝通問題，是多益常見考題焦點。</p>
         `
       },
       {
         id: 5,
         question: "What does the author primarily emphasize in the first paragraph?",
         passage: `The growing popularity of online certification programs has led many professionals to question the long-standing value of traditional degrees. With institutions ranging from Ivy League universities to local community colleges now offering digital badges and micro-credentials, the educational landscape appears more competitive and accessible. However, critics argue that not all programs maintain consistent quality, and some question whether these shorter courses sufficiently develop the critical thinking skills typically associated with extended study.
-  
+
                      To address these concerns, several accrediting bodies have begun establishing universal standards for online programs, ensuring that course outcomes meet industry requirements. The shift also places greater responsibility on learners to research program reputations and verify accreditation. Nonetheless, many see the rise of online credentials as a transformative force that democratizes education and fosters continuous learning in fast-evolving job markets.`,
         options: [
           "The cost-effectiveness of traditional degree programs",
@@ -702,7 +711,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>首段主軸是線上認證的普及與爭議，提到其在教育市場的地位，以及傳統學位的競爭性。</p>
+          <p>首段重點為線上認證普及，以及與傳統學位價值的爭論。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>micro-credential (n.) - 微認證</li>
@@ -710,16 +719,14 @@ const questions = {
             <li>democratize (v.) - 使民主化、使普及</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            TOEIC 閱讀常考 "trend" + "debate" 型文章。首段多概述現況與爭議點。
-          </p>
+          <p>TOEIC 閱讀常見「新趨勢 vs. 傳統」對比，並問文章主要強調點。</p>
         `
       },
       {
         id: 6,
         question: "According to the passage, why are investors closely monitoring bio-plastics research?",
         passage: `As environmental legislation tightens around the globe, many corporations have begun exploring bio-based plastics as an alternative to traditional petroleum-derived materials. Researchers claim these innovative polymers could reduce carbon emissions and mitigate landfill waste by decomposing more rapidly under the right conditions. However, cost and scalability remain significant barriers to widespread adoption, forcing companies to weigh immediate expenses against long-term sustainability gains.
-  
+
                      In response, venture capitalists and private equity firms have funneled considerable funding into bio-plastics startups, hoping to capitalize on an emerging market that promises both environmental benefits and profitable returns. Analysts predict that if mass production becomes feasible, early investors stand to gain substantial rewards. Nonetheless, skepticism persists regarding the actual biodegradability of certain bio-plastics, with critics demanding more comprehensive lifecycle assessments before fully endorsing these materials.`,
         options: [
           "Because petroleum-derived materials are cheaper to produce",
@@ -730,7 +737,7 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>文章提到投資人注資 "hoping to capitalize on an emerging market"，暗示他們看好這類市場的盈利與環保效益。</p>
+          <p>投資人看好「環保 + 利潤」並存的潛力市場。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>legislation (n.) - 法規</li>
@@ -739,16 +746,14 @@ const questions = {
             <li>biodegradability (n.) - 生物分解性</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            本題問投資人「為何」關注這項技術，關鍵在於潛在利潤與環保趨勢（"profitable returns" + "environmental benefits"）。
-          </p>
+          <p>投資與潛力市場的題材常出現在 TOEIC 閱讀，重點為「利潤 + 環境效益」雙重吸引。</p>
         `
       },
       {
         id: 7,
         question: "Which statement is most strongly supported by the details in paragraph 2?",
         passage: `Contrary to popular belief, implementing a four-day workweek does not necessarily compromise productivity. A pilot program conducted across multiple international offices demonstrated that employees, given an extra day of rest, exhibited higher morale and efficiency. Absenteeism also dropped significantly, with workers feeling more recharged and motivated. Despite initial concerns, team collaboration improved due to better work-life balance, leading to fewer burnout cases and enhanced creativity.
-  
+
                     Managers, however, reported logistical challenges. Scheduling client meetings across time zones grew more complex, and meeting deadlines for large-scale projects demanded stricter planning. Some executives worried that the compressed schedule might deter potential clients who expect round-the-clock availability. Nevertheless, the overall results indicated that productivity gains often outweighed the inconveniences, suggesting that a four-day workweek could be a viable option for companies prioritizing employee well-being.`,
         options: [
           "Employees in the pilot program reported decreased morale",
@@ -759,25 +764,22 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>第二段結尾強調 "productivity gains often outweighed the inconveniences"。因此，雖有排程問題，整體成效正面。</p>
+          <p>整段結論為：儘管排程更複雜，但實施結果顯示「生產力」依然提升。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>absenteeism (n.) - 缺勤</li>
-            <li>burnout (n.) - 精疲力竭、職業倦怠</li>
-            <li>deter (v.) - 嚇阻</li>
+            <li>burnout (n.) - 職業倦怠</li>
             <li>round-the-clock (adj.) - 24 小時的</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            多益閱讀常考「試點計畫成果」的正負面影響，並讓考生挑出作者或研究的結論。
-          </p>
+          <p>多益閱讀常問試點計畫成果及優劣勢。此題重點：四天工作制仍能提高效率。</p>
         `
       },
       {
         id: 8,
         question: "What can be inferred about consumer behavior from the study mentioned?",
         passage: `A major retail chain initiated a pilot study to analyze consumer responses to dynamic pricing—a strategy that adjusts product costs based on demand, time of day, or stock levels. Researchers discovered that shoppers are generally receptive to slight price fluctuations when they perceive a fair rationale behind them, such as off-peak discounts or limited promotional inventory. However, sudden or unjustified hikes in price led to customer dissatisfaction and negative reviews on social media.
-  
+
                     Interestingly, the data also showed that transparent communication about pricing policies can alleviate potential backlash. Stores that displayed detailed notices explaining why prices changed saw fewer complaints and, in some cases, improved customer loyalty. This suggests that while dynamic pricing can increase profit margins, it must be implemented with careful messaging to maintain consumer trust.`,
         options: [
           "Consumers never react negatively to changing prices",
@@ -788,24 +790,21 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>研究顯示當店家公開說明為何變價，就能「緩和可能的負面反應」，故選項指明「透明化能降低負面回饋」。</p>
+          <p>研究顯示商家若公開說明變價原因，就能減少負面反應。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>dynamic pricing (n.) - 動態定價</li>
-            <li>fluctuation (n.) - 波動</li>
-            <li>backlash (n.) - 強烈反對、反彈</li>
+            <li>backlash (n.) - 強烈反對</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            需注意顧客行為與店家策略的因果關係。「透明溝通」和「合理原因」是多益常見考題焦點。
-          </p>
+          <p>多益閱讀愛考「策略 vs. 消費者行為」；透明度常能降低負面聲量。</p>
         `
       },
       {
         id: 9,
         question: "Which aspect of the company's development is emphasized in the third paragraph?",
         passage: `Founded just five years ago, WaveAnalytics rapidly evolved from a niche data visualization tool into a comprehensive business intelligence platform. After securing multiple venture capital rounds, the company attracted top talent from leading tech firms and expanded its product suite to cater to diverse industries. Currently, WaveAnalytics software is used by major retail chains, healthcare providers, and financial institutions seeking real-time insights from large datasets.
-  
+
                      In the third year of operation, strategic partnerships with cloud service providers propelled WaveAnalytics into international markets. The platform’s advanced analytics and customizable dashboards garnered recognition for reducing clients’ decision-making time. Most notably, CEO Samantha Davis attributed the company's success to a corporate culture that values continual learning, encouraging employees to attend workshops and collaborate across departments. This internal ethos, combined with an outward focus on client-centric product innovation, has positioned WaveAnalytics as a formidable challenger to established industry players.`,
         options: [
           "Its reliance on outdated analytics methods",
@@ -816,25 +815,23 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>第三段強調 CEO 表示成功歸因於 "a corporate culture that values continual learning" 以及跨部門合作。</p>
+          <p>第三段強調 CEO 提到「公司文化」重視持續學習與跨部門合作，是成功關鍵。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>comprehensive (adj.) - 全面的</li>
             <li>dataset (n.) - 數據集</li>
             <li>client-centric (adj.) - 以客戶為中心的</li>
-            <li>formidable (adj.) - 強大的、令人敬畏的</li>
+            <li>formidable (adj.) - 強大的</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            本段聚焦組織文化與成長策略，"culture" 是多益商業類文章的常考重點。
-          </p>
+          <p>常考：公司文化對於發展的重要性，以及技術與文化並重。</p>
         `
       },
       {
         id: 10,
         question: "Which statement can be inferred about the global textile market from paragraph 2?",
         passage: `The global textile market has seen a gradual shift towards more sustainable practices, with major brands adopting organic fabrics and water-efficient dyeing technologies. However, a recent industry report by GreenEarth Insights highlights that despite these positive developments, fast-fashion consumer habits continue to drive up overall production volumes. This paradoxical situation means that even though per-garment pollution may be decreasing, the total environmental impact remains high.
-  
+
                      Experts argue that genuine progress requires not just greener manufacturing methods, but also a cultural change in how consumers perceive and dispose of clothing. Overproduction leads to enormous waste in landfills and puts a strain on natural resources. While several pilot projects aim to promote recycling and circular fashion, the report concludes that a collective effort, involving retailers, policymakers, and consumers, is necessary to achieve real and lasting environmental benefits.`,
         options: [
           "Sustainable methods alone have completely solved pollution issues",
@@ -845,27 +842,24 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>雖然單件衣物的汙染減少，但「產量持續攀升」導致整體環境衝擊依然嚴重。</p>
+          <p>文章指出「單件污染雖減少，但產量仍很高」→ 整體環境衝擊依舊巨大。</p>
           <h4>重要單字：</h4>
           <ul>
-            <li>textile (n.) - 紡織品</li>
             <li>fast-fashion (n.) - 快速時尚</li>
             <li>circular fashion (n.) - 循環時尚</li>
             <li>landfill (n.) - 垃圾掩埋場</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            常見考點：「綠色生產 vs. 高量生產」的矛盾；要抓住整體趨勢與細節對比。
-          </p>
+          <p>多益常考「局部環保成效 vs. 整體產業規模」的反差。</p>
         `
       },
-  
+
       // ===== 新增的 10 題 (id: 11 ~ 20) =====
       {
         id: 11,
         question: "What is the main concern discussed in the first paragraph?",
         passage: `In recent years, digital marketplaces have surged in popularity, allowing entrepreneurs of all sizes to reach a global customer base with minimal overhead costs. However, this rapid expansion has also led to increasing scrutiny over seller accountability and product authenticity. Many online platforms face the challenge of verifying the legitimacy of thousands of new vendors each month, raising concerns about counterfeit goods, privacy breaches, and consumer trust.
-  
+
         In response, major e-commerce giants are implementing stricter onboarding procedures, including background checks and mandatory identity verification. Some have even introduced automated systems to detect fraudulent listings by analyzing pricing anomalies and suspicious seller activities. While these measures can bolster trust, critics argue they may inadvertently create barriers for small businesses lacking extensive documentation. Thus, the digital marketplace realm remains a dynamic frontier, balancing innovation with the need for robust consumer protections.`,
         options: [
           "Rising costs of running traditional retail stores",
@@ -876,7 +870,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>文章強調數位市場擴張後，平台面臨「驗證賣家身份、假貨、隱私安全」等問題，故最大關注點是賣家真實性及消費者信任。</p>
+          <p>文章重點為「平台需驗證大量新賣家，造成假貨、隱私漏洞與信任度問題」。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>scrutiny (n.) - 審查</li>
@@ -885,16 +879,14 @@ const questions = {
             <li>fraudulent (adj.) - 欺詐的</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            多益閱讀常考線上商務與信任機制，需識別「賣家核實」和「假貨」等核心議題。
-          </p>
+          <p>線上市場常見考題：安全性、假貨、第三方賣家核實等。</p>
         `
       },
       {
         id: 12,
         question: "What is one potential downside of the automated systems mentioned?",
         passage: `E-commerce platforms employ advanced algorithms to identify red flags associated with fraudulent seller behavior. For instance, a sudden spike or drastic reduction in product prices can trigger an investigation. Additionally, AI tools scan product descriptions for misleading keywords or repeated listings, flagging suspicious activity in real time. While these mechanisms significantly reduce scam incidents, they also risk penalizing legitimate sellers who employ aggressive promotional strategies or engage in rapid inventory turnover.
-  
+
         To mitigate such risks, platforms often provide an appeal process, allowing flagged vendors to submit documentation to verify their authenticity. Nonetheless, small businesses, especially those operating on thin margins, may find it challenging to gather the extensive paperwork required to clear their names quickly. Overreliance on automated detection could potentially discourage budding entrepreneurs, affecting market diversity. Critics suggest that a hybrid approach—combining algorithmic monitoring with human oversight—would strike a better balance between security and inclusivity.`,
         options: [
           "They allow scammers to operate freely without detection",
@@ -905,24 +897,22 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>系統可能因「價格變動過大」等行銷策略誤判，導致誠實賣家受罰。</p>
+          <p>演算法系統可能誤判採用促銷手段的合法賣家，導致不公平懲罰。</p>
           <h4>重要單字：</h4>
           <ul>
-            <li>flag (v.) - 標記、警示</li>
+            <li>flag (v.) - 標記</li>
             <li>turnover (n.) - (庫存)周轉率；(人員)流動率</li>
             <li>margins (n.) - 利潤空間</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            注意「演算法優勢與弊端」是多益常見考題，尤其關於「誤罰」或「誤封」是熱門議題。
-          </p>
+          <p>程式誤判導致合法賣家被阻擋，是常見電商議題。</p>
         `
       },
       {
         id: 13,
         question: "Which statement is best supported by the data on employee engagement mentioned in the passage?",
         passage: `A multinational electronics firm conducted a comprehensive survey assessing employee engagement across its various global branches. Results indicated that offices with proactive management styles and ample professional development opportunities scored significantly higher in job satisfaction. Furthermore, locations where employees felt empowered to voice concerns without retaliation showed a 25% increase in overall productivity metrics.
-  
+
         Despite these positive correlations, the report highlighted notable discrepancies: some regional branches struggled to implement open-door policies due to cultural norms or hierarchical structures. Additionally, limited training budgets constrained career advancement, particularly in emerging markets. Analysts suggest that bridging these gaps will be crucial for maintaining cohesive corporate values and reducing turnover, which can otherwise cost the firm millions in recruitment and onboarding expenses.`,
         options: [
           "Employees are generally less productive in branches with open-door policies",
@@ -933,24 +923,22 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>文章指出「職業發展機會」和「員工能夠暢所欲言」與高滿意度及生產力正相關。</p>
+          <p>數據顯示「專業成長機會 + 能暢所欲言」的辦公室擁有更高員工滿意度與生產力。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>engagement (n.) - 參與度、投入度</li>
-            <li>hierarchical (adj.) - 階層制的</li>
+            <li>hierarchical (adj.) - 階級制的</li>
             <li>turnover (n.) - 人員流動率</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            TOEIC 閱讀常見「員工滿意度」研究；要注意具體措施（開放式政策、專業培訓）與其影響。
-          </p>
+          <p>此題強調員工投入度的影響因素：溝通、培訓、管理風格等。</p>
         `
       },
       {
         id: 14,
         question: "Why does the report suggest a hybrid office model could be advantageous?",
         passage: `With the global pandemic reshaping work environments, a growing number of companies are adopting hybrid office models, where employees split their time between remote work and on-site collaboration. According to a recent consultancy report, this approach not only reduces operational costs but also provides flexibility that can improve employee morale. By leveraging digital tools, teams can maintain effective communication and real-time project tracking.
-  
+
         However, some challenges persist. For instance, remote workers may feel isolated if not given adequate support or clear performance metrics. Meanwhile, on-site teams might struggle to coordinate schedules across different time zones and work styles. The report concludes that while the hybrid model strikes a balance between autonomy and face-to-face interaction, companies must invest in robust infrastructure and supportive management practices to maximize the benefits. This includes offering professional development courses tailored for remote work and setting transparent guidelines for team coordination.`,
         options: [
           "It simplifies all scheduling conflicts without any infrastructure costs",
@@ -961,7 +949,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>報告指出混合辦公能減少成本並提高員工士氣，但需良好基礎設施與管理配合。</p>
+          <p>報告指出混合辦公可「降低營運成本 & 提高員工士氣」，但需投資管理和基礎設施。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>hybrid office model - 混合辦公模式</li>
@@ -969,16 +957,14 @@ const questions = {
             <li>infrastructure (n.) - 基礎設施</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            「混合辦公」相關文章在多益閱讀中常考，需掌握優勢、挑戰與必要條件。
-          </p>
+          <p>多益商業文章常考混合辦公優勢：彈性、成本、士氣提升等。</p>
         `
       },
       {
         id: 15,
         question: "Which factor is highlighted as a key driver for the new tourism trends?",
         passage: `Tourism boards worldwide have noticed a marked shift in traveler preferences. Instead of typical sightseeing tours in metropolitan hotspots, tourists are increasingly seeking immersive cultural experiences, wellness retreats, and ecologically responsible accommodations. Industry analysts attribute this change partly to social media influencers who share personal narratives and authentic local interactions, enticing followers to explore off-the-beaten-path destinations.
-  
+
         Moreover, the impact of growing environmental awareness cannot be underestimated. Many travelers consciously select eco-friendly lodgings that implement solar energy, rainwater harvesting, or sustainable waste management. Government authorities in popular regions now impose stricter guidelines on resorts to protect local habitats and minimize ecological footprints. This synergy between consumer demand and regulatory measures suggests a future where sustainable tourism is not just a niche segment but a mainstream expectation.`,
         options: [
           "A decline in global environmental consciousness",
@@ -989,24 +975,22 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>文章強調旅客轉向「深度文化體驗、養生、環保住宿」等趨勢，驅動力包括社群媒體與環保意識提升。</p>
+          <p>文章強調旅客想要「深度文化體驗+環保住宿」，以及環保意識的成長。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>immersive (adj.) - 身臨其境的</li>
-            <li>off-the-beaten-path (adj.) - 非主流的、不尋常的</li>
+            <li>off-the-beaten-path (adj.) - 不走尋常路的</li>
             <li>rainwater harvesting (n.) - 雨水收集</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            多益閱讀常出現「旅遊產業趨勢」文章，須留意影響旅客行為的多重因素。
-          </p>
+          <p>多益閱讀裡「旅遊趨勢」常考「消費者偏好變化」與「永續、在地體驗」等方向。</p>
         `
       },
       {
         id: 16,
         question: "What can be inferred about the collaboration between the robotics start-up and the automotive manufacturer?",
         passage: `ZenMech Robotics recently entered a strategic partnership with NovaDrive, a leading automotive manufacturer, to develop autonomous assembly line technologies. By integrating ZenMech's cutting-edge robotic arms and NovaDrive's production expertise, the two companies aim to reduce human error, accelerate manufacturing speed, and enhance workplace safety. Prototypes demonstrated a 30% reduction in assembly time and a notable decrease in material waste.
-  
+
         Despite these advancements, engineers face persistent challenges in synchronizing complex robotic operations with existing factory layouts. Additionally, labor unions have voiced concerns about potential job displacement, urging both companies to commit to reskilling initiatives. If successfully implemented, however, this collaboration could set a new standard for smart manufacturing, potentially reshaping the industry on a global scale.`,
         options: [
           "They plan to eliminate all labor unions in existing factories",
@@ -1017,7 +1001,7 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>文中指出兩家公司合作研發自動化生產技術，以降低人為錯誤並加速生產。</p>
+          <p>合作目標是在生產線導入先進機器人技術，提高生產效率並減少人為錯誤。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>autonomous assembly line - 自動化生產線</li>
@@ -1025,16 +1009,14 @@ const questions = {
             <li>displacement (n.) - 取代</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            此類文章常考「技術合作目的」與「對人力的影響」。勞工議題也是多益重點。
-          </p>
+          <p>看出文中兩家公司合作的主要目的：提升效率、安全與國際競爭力。</p>
         `
       },
       {
         id: 17,
         question: "Which reason best explains why some branches struggled with supply chain issues?",
         passage: `Magnus Foods, a global distributor of packaged snack products, revealed in its latest quarterly report that certain branches experienced prolonged shipping delays and production bottlenecks. Contributing factors include fluctuating commodity prices, tighter border regulations, and inconsistent quality from third-party suppliers. In some cases, raw materials like cocoa and almonds were held up due to increased inspection protocols aimed at ensuring safety standards.
-  
+
         Compounding these challenges, sudden spikes in consumer demand for healthier snack alternatives meant that plants using newly-sourced organic ingredients lacked robust vendor networks. Consequently, the company had to scramble for secondary suppliers to maintain production schedules. Executives acknowledge that while overall sales remain strong, localized disruptions can jeopardize brand reliability. The report emphasizes the need for agile contingency planning and diversified sourcing strategies moving forward.`,
         options: [
           "They focused solely on local suppliers without expanding globally",
@@ -1045,24 +1027,22 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>文中提到「法規更嚴、供應商不穩、需求暴增」等原因，導致供應鏈中斷和生產延誤。</p>
+          <p>報告指出「法規更嚴、供應商不穩、健康零食需求暴增」等是導致供應鏈問題的主因。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>bottleneck (n.) - 瓶頸</li>
             <li>inspection protocol (n.) - 檢驗程序</li>
-            <li>contingency planning - 應急計畫</li>
+            <li>contingency planning - 應變計畫</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            供應鏈與生產延誤是多益熱門情境，考生需抓住造成延誤的「多重因素」。
-          </p>
+          <p>TOEIC 閱讀裡常見的供應鏈延誤因素：法規、供應不穩、需求劇增等多重因素疊加。</p>
         `
       },
       {
         id: 18,
         question: "Which conclusion can be drawn about the company's sustainability policy?",
         passage: `EcoMarine Cargo Solutions has long prided itself on its green policies, claiming a 40% reduction in carbon emissions over the past five years. However, an independent audit revealed inconsistencies in their offshore shipping routes, suggesting that actual emissions might be higher than reported. While the company did invest in cleaner fuel alternatives for its fleet, the audit indicates that inefficient route planning offset much of the environmental benefit.
-  
+
         In light of these findings, EcoMarine announced a partnership with an AI-based logistics platform to optimize navigation paths and improve tracking of fuel consumption. The executive team also pledged greater transparency by releasing quarterly updates verified by a third party. Although critics question whether these measures can swiftly rectify past discrepancies, experts note that EcoMarine's open acknowledgment of shortcomings is a step toward genuine accountability.`,
         options: [
           "EcoMarine has fully resolved all emission-related issues",
@@ -1073,24 +1053,22 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>審核報告顯示，雖公司採用較潔淨燃料，但路線規劃不當使減排效果打折扣。</p>
+          <p>審核指出雖然使用清潔燃料，但航線規劃不善使減排成果被抵消了一部分。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>offset (v.) - 抵消</li>
-            <li>discrepancy (n.) - 出入、差異</li>
+            <li>discrepancy (n.) - 落差、不一致</li>
             <li>accountability (n.) - 問責、負責</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            多益考「公司聲稱 vs. 審核結果」的對比，重點在「實際效益與聲明不符」。
-          </p>
+          <p>多益題常考公司聲明 vs. 審計結果。關鍵在「是否存在矛盾或不足之處」。</p>
         `
       },
       {
         id: 19,
         question: "Why have some local business owners opposed the construction of a new resort?",
         passage: `In an effort to attract foreign visitors, the Lakeshore City Council approved plans for a new luxury resort near the iconic lakefront. Proponents of the project argue it will bolster the local economy by creating jobs and modernizing recreational facilities. However, many small business owners remain skeptical, fearing that the massive development could overshadow family-run establishments and inflate property values.
-  
+
         Furthermore, environmental groups have expressed concerns about disrupting the lake's fragile ecosystem. Dredging activities required for the resort's marina could alter water quality, affecting local fisheries. While the council insists that they will enforce stringent environmental guidelines, activists demand comprehensive impact assessments. With public opinion divided, the city must weigh economic gains against potential social and ecological repercussions.`,
         options: [
           "They believe it will significantly improve the local environment",
@@ -1101,7 +1079,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>文中提到小商家擔心大型度假村出現後，會蓋過自家生意並推高房價。</p>
+          <p>小商家擔心大型度假村出現後會衝擊當地生意並推高房價。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>dredging (n.) - 疏浚</li>
@@ -1109,16 +1087,14 @@ const questions = {
             <li>repercussion (n.) - 後果、影響</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            城市開發類文章常聚焦「經濟效益 vs. 在地商家與環境影響」，是多益閱讀常見的矛盾情境。
-          </p>
+          <p>多益中，城市開發通常涉及「經濟收益 vs. 生態/在地商家」之平衡。</p>
         `
       },
       {
         id: 20,
         question: "What common theme do the examples in paragraph 2 illustrate?",
         passage: `A growing body of evidence suggests that a lack of cross-departmental collaboration can stifle innovation, no matter how talented individual teams may be. For instance, in a large pharmaceutical firm, the research division developed groundbreaking compounds but failed to communicate their potential applications to the marketing and distribution branches. Consequently, promising products languished in late-stage trials without commercial support.
-  
+
         Similarly, a tech startup boasting an impressive coding team launched a platform with cutting-edge features, yet the user interface remained unintuitive due to insufficient input from the design department. In both cases, the absence of integrated feedback loops inhibited timely refinements and undermined final outcomes. Experts argue that fostering a culture of transparency and routine inter-team evaluations is vital for converting specialized expertise into market-ready innovations.`,
         options: [
           "They highlight the benefits of isolated departmental efforts",
@@ -1129,21 +1105,19 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>兩個例子（製藥公司、科技新創）都說明部門間缺乏溝通導致商業化與產品體驗失敗。</p>
+          <p>兩個例子都顯示部門間缺乏溝通導致好東西無法成功商業化。</p>
           <h4>重要單字：</h4>
           <ul>
             <li>languish (v.) - 被忽視、受冷落</li>
-            <li>feedback loop (n.) - 回饋迴路</li>
+            <li>feedback loop (n.) - 回饋循環</li>
             <li>stifle (v.) - 抑制</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>
-            多益閱讀常考「跨部門協作」的重要性。需看清「成功或失敗」背後原因，通常與溝通有關。
-          </p>
+          <p>TOEIC 閱讀常考跨部門合作的重要性及失敗案例。</p>
         `
       }
     ],
-  
+
     // ================== 語法 (Grammar) ==================
     grammar: [
       // ===== 原本的 10 題 (id: 1 ~ 10) =====
@@ -1165,7 +1139,7 @@ const questions = {
             <li>Had it not been for... - 若不是因為...</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>這是「與過去事實相反」的假設，屬第三條件句，故用 past perfect + would have p.p.。</p>
+          <p>這是「與過去事實相反」的假設（第三條件句）。</p>
         `
       },
       {
@@ -1186,7 +1160,7 @@ const questions = {
             <li>insist that + S + (should) + V (原形) - 堅持要...</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>多益常考動詞 "suggest, insist, recommend, demand" + "that + 原形" 的用法。</p>
+          <p>多益常考動詞 "suggest, insist, recommend, demand" + that + 原形。</p>
         `
       },
       {
@@ -1201,14 +1175,13 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>題干表示「CEO 不會批准預算，除非所有部門先提交預測」，故用 "unless" 表示「除非」。</p>
-          <h4>重要單字 / 短語：</h4>
+          <p>句意為「除非所有部門先交預測，否則CEO不批准預算提案」，用 "unless"。</p>
+          <h4>重要單字：</h4>
           <ul>
-            <li>unless - 除非</li>
             <li>forecast (n.) - 預測</li>
           </ul>
           <h4>學習重點：</h4>
-          <p>"unless" 和 "if...not" 在多益中容易混淆。此題凸顯「條件不成立就不做」的結構。</p>
+          <p>"unless" 等於 "if...not" 的結構，是多益常考的條件連接詞。</p>
         `
       },
       {
@@ -1223,13 +1196,9 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>此題需被動句，"guidelines" 是被實施的對象，因此用 "will be implemented"。</p>
-          <h4>重要單字：</h4>
-          <ul>
-            <li>implement (v.) - 實施</li>
-          </ul>
+          <p>「新指引被實施」，需被動："will be implemented"。</p>
           <h4>學習重點：</h4>
-          <p>多益考試常考被動語態；"guidelines will be implemented" 是常見句型。</p>
+          <p>多益常考被動語態。注意主動 vs. 被動區別。</p>
         `
       },
       {
@@ -1244,13 +1213,9 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>倒裝句："Not only + 助動詞/Be + 主詞 + 動詞..." → "Not only was it well-organized..."。</p>
-          <h4>重要單字：</h4>
-          <ul>
-            <li>networking opportunities - 人脈建立的機會</li>
-          </ul>
+          <p>倒裝句，"Not only was it well-organized..."。</p>
           <h4>學習重點：</h4>
-          <p>多益中 "Not only... but also..." 倒裝用法非常常見，要注意助動詞或 be 動詞放前的結構。</p>
+          <p>「Not only + 助動詞/Be + 主詞 + 動詞... but also...」。</p>
         `
       },
       {
@@ -1265,13 +1230,7 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>條件句的倒裝：If you should have any questions → Should you have any questions。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>Should you have any questions - 若你有任何疑問</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>本題測驗「省略 if 的倒裝句」：Should + 主詞 + 動詞...</p>
+          <p>條件句倒裝：If you should have any questions → Should you have any questions。</p>
         `
       },
       {
@@ -1286,13 +1245,7 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>此為未來完成被動式結構："will have been finalized"。表示在未來某一時點前已完成。</p>
-          <h4>重要單字：</h4>
-          <ul>
-            <li>finalize (v.) - 定案、使結束</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益常考未來完成式 + 被動語態，用於表示「在未來另一事件前已經完成」的動作。</p>
+          <p>未來完成被動式："will have been finalized"。</p>
         `
       },
       {
@@ -1307,13 +1260,7 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>「與過去事實相反」的假設句型，應為 "would have p.p."，所以 "he would have applied earlier"。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>Had he known... - 若他當時知道...</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>典型第三條件句示例，強調對過去事實的推測。</p>
+          <p>與過去事實相反 (第三條件)："he would have applied earlier"。</p>
         `
       },
       {
@@ -1328,13 +1275,7 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>正確相對子句結構："The employee who recommended the new software..."。</p>
-          <h4>重要單字：</h4>
-          <ul>
-            <li>relative clause - 關係子句</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>"who" 用於修飾「人」，且位置緊跟在名詞之後。</p>
+          <p>"The employee who recommended the new software..."。關係代名詞用 who 修飾人。</p>
         `
       },
       {
@@ -1349,16 +1290,10 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>本題是與過去事實相反：If + had p.p., would have p.p.</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>attend (v.) - 出席</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益語法常考第三條件句：If you had V-ed, you would have V-ed.</p>
+          <p>與過去事實相反（第三條件）："If you had attended..., you would have learned..."。</p>
         `
       },
-  
+
       // ===== 新增的 10 題 (id: 11 ~ 20) =====
       {
         id: 11,
@@ -1372,13 +1307,7 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>強調副詞（Never）置於句首須進行倒裝："Never have I seen..."。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>inversion (n.) - 倒裝</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益中常考「否定副詞 + 倒裝」：Never/Seldom/Rarely + 助動詞/be + 主詞 + 動詞。</p>
+          <p>否定副詞置句首 → 倒裝："Never have I seen..."。</p>
         `
       },
       {
@@ -1393,13 +1322,7 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>動詞 demand + that 子句使用虛擬語氣，需用原形動詞 "implement"。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>demand (v.) - 要求</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>同類常考動詞：suggest, insist, recommend, propose 等 + that + S + V原形。</p>
+          <p>虛擬語氣，demand + that + S + V原形："implement"。</p>
         `
       },
       {
@@ -1414,19 +1337,12 @@ const questions = {
         correctAnswer: 3,
         explanation: `
           <h4>解析：</h4>
-          <p>本句使用條件倒裝表示「過去與現在的虛擬」，客戶若過去接受，現在正要簽約。正確用法：Had + S + p.p. → would + now be V-ing。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>conditional inversion - 條件倒裝</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>注意混合條件句：過去動作影響現在結果的結構。</p>
+          <p>「混合條件句」：若過去接受（Had the client accepted...），現在（would now be signing）。</p>
         `
       },
       {
         id: 14,
-        question:
-          "Choose the best sentence that correctly uses a complex relative clause with a preposition at the end:",
+        question: "Choose the best sentence that correctly uses a complex relative clause with a preposition at the end:",
         options: [
           "The contract which we agreed upon it last week is now invalid.",
           "The contract which we agreed upon last week is now invalid.",
@@ -1436,13 +1352,7 @@ const questions = {
         correctAnswer: 1,
         explanation: `
           <h4>解析：</h4>
-          <p>"agree upon something" 是常見搭配，而關係代名詞在此可用 "which"；句末介係詞 "upon" 正確保留。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>agree upon - 達成共識</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>英語允許在口語或不太正式的文體中將介係詞置於句尾，但必須刪除重複的代名詞。</p>
+          <p>正確寫法：「The contract (which) we agreed upon last week is now invalid.」</p>
         `
       },
       {
@@ -1457,13 +1367,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>現在完成進行式結構為 have/has + been + V-ing。故正解是 "We have been discussing..."。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>present perfect continuous - 現在完成進行式</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益中可能測時態一致性，"for + 時段" 常搭配完成或完成進行式。</p>
+          <p>現在完成進行式：have/has + been + V-ing。"We have been discussing..."。</p>
         `
       },
       {
@@ -1479,13 +1383,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>此為第一條件句（與未來可能發生的情況相符）：If + 現在式 → will + 原形。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>adjust (v.) - 調整</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益中第一條件句：「If + 現在式，主詞 + will + V」。表「未來可能」情境。</p>
+          <p>第一條件句：If + 現在式 → will + 原形動詞（"will be in trouble"）。</p>
         `
       },
       {
@@ -1500,13 +1398,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>使役動詞 have + 受詞 + 原形動詞："We had our legal team review the document."</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>causative (adj.) - 使役的</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益常考 "have/make/let + 受詞 + 原形動詞" 的結構。</p>
+          <p>"have + 受詞 + V原形" → "We had our legal team review the document..."。</p>
         `
       },
       {
@@ -1522,13 +1414,7 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>未來完成式：will have + p.p.，表示在未來某個時間點前完成。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>future perfect - 未來完成式</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益時態題常考「by + 未來時間」，用「will have + p.p.」。</p>
+          <p>未來完成式：will have + p.p.。</p>
         `
       },
       {
@@ -1543,13 +1429,7 @@ const questions = {
         correctAnswer: 0,
         explanation: `
           <h4>解析：</h4>
-          <p>同位語用逗號前後隔開，正確句型："Mr. Wang, our chief financial officer, will announce..."。</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>appositive (n.) - 同位語</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>同位語修飾主詞時需用逗號隔開；多益常考商業職位等同位語。</p>
+          <p>同位語以逗號前後分隔："Mr. Wang, our chief financial officer, will announce..."。</p>
         `
       },
       {
@@ -1564,18 +1444,12 @@ const questions = {
         correctAnswer: 2,
         explanation: `
           <h4>解析：</h4>
-          <p>過去式主句 + 假設語氣：若過去錯過截止日期，則會承擔後果 → "I realized (past) that if you missed (past) the deadline, you would pay (過去助動詞) the penalty."</p>
-          <h4>重要單字 / 短語：</h4>
-          <ul>
-            <li>sequence of tenses - 時態一致性</li>
-          </ul>
-          <h4>學習重點：</h4>
-          <p>多益常考主句與條件句時態相互對應：主句 past，條件句 past → 結果子句 would + V。</p>
+          <p>主句用過去 (realized) → 條件用過去 (if you missed) → 結果用 would。</p>
         `
       }
     ]
-  };
-  
-  // 輸出完整的 questions 物件
-  console.log(questions);
-  
+  });
+
+  //（非必須）可視需要保留或移除：
+  // console.log("questions.js 已載入並推入 window.questionSets！");
+})();

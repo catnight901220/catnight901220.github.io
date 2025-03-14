@@ -14,8 +14,6 @@
       --text-color: #333;
       --bg-color: #f5f5f5;
       --card-bg: #ffffff;
-
-      /* 漸層背景色 */
       --header-gradient: linear-gradient(135deg, #2196f3, #1976d2);
     }
 
@@ -27,7 +25,7 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
-      transition: all 0.3s ease; /* 切換桌面/手機模式時，做平滑轉換 */
+      transition: all 0.3s ease;
     }
 
     .container {
@@ -75,7 +73,6 @@
       justify-content: space-around;
       margin: 20px 0;
       padding: 15px;
-      /* 文字改為深色，避免與背景太接近 */
       color: #222;
       background-color: #f8f9fa;
       border-radius: 10px;
@@ -133,7 +130,6 @@
       animation: fadeInOption 0.8s forwards;
     }
 
-    /* 選項分批顯示 */
     .option:nth-child(2) {
       animation-delay: 0.1s;
     }
@@ -175,7 +171,6 @@
       animation: correctPulse 0.4s 2;
     }
 
-    /* 正解（若答錯時要顯示） */
     .correct-answer {
       background-color: #c8e6c9;
       border-color: var(--success-color);
@@ -199,7 +194,6 @@
       animation: shake 0.6s;
     }
 
-    /* 答錯時搖晃 */
     @keyframes shake {
       0%,
       100% {
@@ -310,7 +304,6 @@
       color: var(--success-color);
     }
 
-    /* 錯誤提示用紅色框 */
     .status-message.wrong {
       background-color: #ffebee;
       color: var(--error-color);
@@ -400,7 +393,6 @@
     .progress-info {
       margin-top: 20px;
       padding: 15px;
-      /* 同樣改為深色字 */
       color: #222;
       background-color: #f8f9fa;
       border-radius: 8px;
@@ -427,7 +419,6 @@
       background-color: #d32f2f;
     }
 
-    /* 五彩紙屑畫布 */
     #confetti-canvas {
       pointer-events: none;
       position: fixed;
@@ -562,11 +553,91 @@
     </div>
   </div>
 
-  <!-- 先載入題庫檔案 -->
-  <script src="questions.js"></script>
-
-  <!-- 五彩紙屑 Canvas -->
+  <!-- =========================
+       動態載入題庫檔案的 JS
+  ========================= -->
   <script>
+    const MAX_QUESTION_FILES = 9;
+
+    function loadScript(filePath) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = filePath;
+        script.onload = () => {
+          console.log("載入成功:", filePath);
+          resolve(filePath);
+        };
+        script.onerror = () => {
+          reject(new Error("載入失敗: " + filePath));
+        };
+        document.head.appendChild(script);
+      });
+    }
+
+    async function autoLoadQuestionFiles() {
+      let fileIndex = 0;
+      while (fileIndex <= MAX_QUESTION_FILES) {
+        const fileName =
+          fileIndex === 0 ? "questions.js" : `questions${fileIndex}.js`;
+        try {
+          await loadScript(fileName);
+          fileIndex++;
+        } catch (error) {
+          console.warn("停止載入，其後檔案不存在或加載失敗：", fileName);
+          break;
+        }
+      }
+    }
+
+    // 重新分配 ID，避免不同檔案題目 ID 重複
+    let allQuestions = { listening: [], reading: [], grammar: [] };
+
+    function mergeQuestionSets() {
+      if (!window.questionSets || window.questionSets.length === 0) {
+        console.warn("尚未載入任何題庫檔案或 questionSets 為空。");
+        return;
+      }
+
+      let listeningCount = 0;
+      let readingCount = 0;
+      let grammarCount = 0;
+
+      window.questionSets.forEach((qs) => {
+        // ===== 聽力 =====
+        if (qs.listening && qs.listening.length) {
+          qs.listening.forEach(q => {
+            listeningCount++;
+            q.id = listeningCount;  // 重新分配新的 id
+            allQuestions.listening.push(q);
+          });
+        }
+
+        // ===== 閱讀 =====
+        if (qs.reading && qs.reading.length) {
+          qs.reading.forEach(q => {
+            readingCount++;
+            q.id = readingCount;
+            allQuestions.reading.push(q);
+          });
+        }
+
+        // ===== 語法 =====
+        if (qs.grammar && qs.grammar.length) {
+          qs.grammar.forEach(q => {
+            grammarCount++;
+            q.id = grammarCount;
+            allQuestions.grammar.push(q);
+          });
+        }
+      });
+    }
+  </script>
+
+  <!-- =========================
+       五彩紙屑 & 主邏輯程式
+  ========================= -->
+  <script>
+    // === 五彩紙屑相關 ===
     const confettiCanvas = document.getElementById('confetti-canvas');
     const confettiCtx = confettiCanvas.getContext('2d');
     let confettiParticles = [];
@@ -588,10 +659,10 @@
 
     function createConfettiParticles() {
       const colors = [
-        'rgba(255,99,71,', // tomato
-        'rgba(54,162,235,', // blue
-        'rgba(255,206,86,', // yellow
-        'rgba(75,192,192,' // green
+        'rgba(255,99,71,',
+        'rgba(54,162,235,',
+        'rgba(255,206,86,',
+        'rgba(75,192,192,'
       ];
       for (let i = 0; i < 100; i++) {
         confettiParticles.push({
@@ -630,7 +701,6 @@
         p.y += p.speed;
         p.x += Math.sin(p.tiltAngle);
         p.tilt = Math.sin(p.tiltAngle) * 15;
-
         if (p.y > confettiCanvas.height) {
           p.x = randomRange(0, confettiCanvas.width);
           p.y = -20;
@@ -644,7 +714,7 @@
         confettiParticles = [];
         createConfettiParticles();
         drawConfetti();
-        setTimeout(stopConfetti, 1500); // 1.5秒後停止
+        setTimeout(stopConfetti, 1500);
       }
     }
 
@@ -655,28 +725,15 @@
       confettiParticles = [];
     }
 
-    initConfetti();
-  </script>
-
-  <!-- 主邏輯程式碼 -->
-  <script>
-    // 全域變數
+    // === 主邏輯 ===
     let currentQuestions = { listening: 1, reading: 1, grammar: 1 };
     let completedQuestions = { listening: [], reading: [], grammar: [] };
     let stats = { correct: 0, total: 0 };
-
     let startTime = new Date();
     let timerInterval;
-
-    // 紀錄最後答題的 section，讓關閉詳解時可進下一題
     let lastAnsweredSection = null;
-
-    // 介面模式
     let isMobileView = false;
 
-    /****************************************************************
-     * 切換介面 (手機 <-> 電腦)
-     ****************************************************************/
     function toggleInterface() {
       isMobileView = !isMobileView;
       const toggleBtn = document.getElementById('toggle-btn');
@@ -689,9 +746,6 @@
       }
     }
 
-    /****************************************************************
-     * 計時器
-     ****************************************************************/
     function updateTimer() {
       const now = new Date();
       const diff = Math.floor((now - startTime) / 1000);
@@ -703,16 +757,11 @@
           .padStart(2, '0')}`;
     }
 
-    /****************************************************************
-     * 顯示統計 & 進度
-     ****************************************************************/
     function updateStats() {
       document.getElementById('correct-count').textContent = stats.correct;
       document.getElementById('total-count').textContent = stats.total;
       const accuracy =
-        stats.total > 0
-          ? Math.round((stats.correct / stats.total) * 100)
-          : 0;
+        stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
       document.getElementById('accuracy').textContent = `${accuracy}%`;
     }
 
@@ -743,9 +792,6 @@
       document.getElementById('progress').style.width = `${progress}%`;
     }
 
-    /****************************************************************
-     * 本地存儲
-     ****************************************************************/
     function saveProgress() {
       localStorage.setItem(
         'toeicProgress',
@@ -769,9 +815,6 @@
       }
     }
 
-    /****************************************************************
-     * 詳細解析的彈窗
-     ****************************************************************/
     function showExplanation(explanation) {
       if (!explanation) return;
       const modal = document.getElementById('explanation-modal');
@@ -780,15 +823,12 @@
       modal.style.display = 'block';
     }
 
-    // 關閉詳解 -> 進入下一題
     function closeExplanation() {
       document.getElementById('explanation-modal').style.display = 'none';
       proceedNextQuestion();
     }
 
-    // 往下一題
     function proceedNextQuestion() {
-      // 移除前一題的 correct/incorrect 樣式
       const container = document.getElementById(`${lastAnsweredSection}-question`);
       const options = container.getElementsByClassName('option');
       for (let opt of options) {
@@ -797,27 +837,14 @@
       displayQuestion(lastAnsweredSection);
     }
 
-    /****************************************************************
-     * 語音功能 (改良版：自動辨別裝置可用語音，嘗試 male / female)
-     ****************************************************************/
     let speechSynth = window.speechSynthesis;
-    let currentUtterance = null;
-
-    /**
-     * 從瀏覽器可用的 voices 中，盡量匹配男或女聲
-     * 若找不到，就回退到 voices[0]
-     */
     function getBestVoice(speaker = 'male') {
       const voices = speechSynthesis.getVoices();
       if (!voices || voices.length === 0) return null;
-
-      // 常見關鍵字 (可自行擴充)
-      const maleKeywords = ['male', 'man', 'david', 'alex', 'fred', 'daniel', 'google us english'];
-      const femaleKeywords = ['female', 'woman', 'zira', 'samantha', 'victoria', 'alice', 'google uk english female'];
-
+      const maleKeywords = ['male','man','david','alex','fred','daniel','google us english'];
+      const femaleKeywords = ['female','woman','zira','samantha','victoria','alice','google uk english female'];
       const wantedKeywords = (speaker === 'male') ? maleKeywords : femaleKeywords;
       let bestVoice = null;
-
       for (let v of voices) {
         const nameLang = (v.name + ' ' + v.lang).toLowerCase();
         if (wantedKeywords.some(kw => nameLang.includes(kw))) {
@@ -825,51 +852,33 @@
           break;
         }
       }
-
       if (!bestVoice) {
         bestVoice = voices[0];
       }
       return bestVoice;
     }
 
-    /**
-     * 播放 TTS 語音
-     * @param {string} text - 要播放的文字
-     * @param {string} speaker - 'male' / 'female'，預設 'male'
-     */
     function speak(text, speaker = 'male') {
       if (!window.speechSynthesis) {
         console.error('此瀏覽器不支援 SpeechSynthesis API。');
         return;
       }
-
-      // 取得語音
       const bestVoice = getBestVoice(speaker);
       if (!bestVoice) {
         console.warn('未能取得合適的語音，請檢查瀏覽器 / 裝置是否支援。');
         return;
       }
-
-      // 取消當前正在播放的音訊
       speechSynthesis.cancel();
-
       const utter = new SpeechSynthesisUtterance(text);
       utter.voice = bestVoice;
-      // 可根據喜好調整
       utter.pitch = 1.0;
       utter.rate = 1.0;
-
       utter.onerror = (err) => {
         console.error('TTS 播放錯誤:', err);
       };
-
-      // 實際播放
       speechSynthesis.speak(utter);
     }
 
-    /****************************************************************
-     * 提示訊息
-     ****************************************************************/
     function showError(section, message) {
       const errorDiv = document.getElementById(`${section}-error`);
       errorDiv.textContent = message;
@@ -879,16 +888,10 @@
       }, 3000);
     }
 
-    /**
-     * 顯示狀態訊息
-     * @param {string} section - listening, reading, grammar
-     * @param {string} message - 顯示的文字
-     * @param {string} type - 可選: 'wrong' (紅色框)
-     */
     function showStatus(section, message, type) {
       const statusDiv = document.getElementById(`${section}-status`);
       statusDiv.textContent = message;
-      statusDiv.className = 'status-message'; // 重置
+      statusDiv.className = 'status-message';
       if (type === 'wrong') {
         statusDiv.classList.add('wrong');
       }
@@ -898,9 +901,6 @@
       }, 3000);
     }
 
-    /****************************************************************
-     * 題目顯示 & 作答
-     ****************************************************************/
     function findQuestion(section, questionId) {
       return questions[section].find((q) => q.id === questionId);
     }
@@ -926,36 +926,30 @@
           '<p>此部分所有題目已完成！請重置進度或等待新題目更新。</p>';
         return;
       }
-
       currentQuestions[section] = nextId;
       const question = findQuestion(section, nextId);
       if (!question) {
         showError(section, '無法載入題目，請重新整理頁面');
         return;
       }
-
       let html = `<p>Question ${question.id}: ${question.question}</p>`;
-
-      // 聽力題目
       if (section === 'listening' && question.audioText) {
+        const audioTextEscaped = question.audioText.replace(/'/g, "\\'");
         html += `
           <div class="audio-controls">
             <button class="play-button"
-              onclick="speak('${question.audioText.replace(/'/g, "\\'")}', '${question.speaker}')">
+              onclick="speak('${audioTextEscaped}', '${question.speaker || 'male'}')">
               播放音訊
             </button>
           </div>
         `;
       } else if (section === 'reading' && question.passage) {
-        // 閱讀題目
         html += `
           <div class="passage">
             <p>${question.passage}</p>
           </div>
         `;
       }
-
-      // 顯示選項
       question.options.forEach((option, index) => {
         html += `
           <div class="option" onclick="selectAnswer('${section}', ${index})">
@@ -963,7 +957,6 @@
           </div>
         `;
       });
-
       html += `<button onclick="submitAnswer('${section}')">提交答案</button>`;
       document.getElementById(`${section}-question`).innerHTML = html;
       saveProgress();
@@ -979,8 +972,7 @@
     }
 
     function submitAnswer(section) {
-      lastAnsweredSection = section; // 紀錄是哪個區塊
-
+      lastAnsweredSection = section;
       const container = document.getElementById(`${section}-question`);
       const options = container.getElementsByClassName('option');
       const selectedOption = container.querySelector('.selected');
@@ -988,10 +980,7 @@
         showError(section, '請選擇一個答案！');
         return;
       }
-
-      // 確保畫面捲動到題目區，避免看不到正確答案
       container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
       const selectedIndex = Array.from(options).indexOf(selectedOption);
       const questionId = currentQuestions[section];
       const question = findQuestion(section, questionId);
@@ -1000,12 +989,11 @@
         return;
       }
 
-      const isCorrect = selectedIndex === question.correctAnswer;
-
       stats.total++;
+      const isCorrect = (selectedIndex === question.correctAnswer);
       if (isCorrect) {
         stats.correct++;
-        startConfetti(); // 答對 -> 五彩紙屑
+        startConfetti();
         showStatus(section, '答對了，恭喜！');
         selectedOption.classList.remove('selected');
         selectedOption.classList.add('correct');
@@ -1013,34 +1001,28 @@
         showStatus(section, '答錯了，再接再厲！', 'wrong');
         selectedOption.classList.remove('selected');
         selectedOption.classList.add('incorrect');
-        // 顯示正確答案
         const correctOpt = options[question.correctAnswer];
-        correctOpt.classList.add('correct-answer');
+        if (correctOpt) {
+          correctOpt.classList.add('correct-answer');
+        }
       }
 
-      // 紀錄完成
       if (!completedQuestions[section].includes(questionId)) {
         completedQuestions[section].push(questionId);
       }
-
       updateStats();
       updateProgress();
       saveProgress();
 
-      // 等1秒後，才出現詳解 (如有)
       setTimeout(() => {
         if (question.explanation) {
           showExplanation(question.explanation);
         } else {
-          // 若無詳解，直接進下一題
           proceedNextQuestion();
         }
       }, 1000);
     }
 
-    /****************************************************************
-     * 重置進度 + 清除快取
-     ****************************************************************/
     function resetProgress() {
       if (
         confirm(
@@ -1053,8 +1035,6 @@
           stats = { correct: 0, total: 0 };
           localStorage.removeItem('toeicProgress');
           localStorage.clear();
-
-          // 刪除所有 Service Worker Cache
           if ('caches' in window) {
             caches.keys().then((cacheNames) => {
               cacheNames.forEach((cacheName) => {
@@ -1062,7 +1042,6 @@
               });
             });
           }
-
           alert('進度已成功重置，並已刪除快取。頁面將重新載入！');
           window.location.reload();
         } catch (err) {
@@ -1072,30 +1051,35 @@
       }
     }
 
-    /****************************************************************
-     * 初始化
-     ****************************************************************/
     function initialize() {
       loadProgress();
       updateProgress();
       updateStats();
-
       startTime = new Date();
       timerInterval = setInterval(updateTimer, 1000);
 
-      // 等待聲音列表載入後，再載入題目
       speechSynthesis.onvoiceschanged = function () {
         console.log('Voices loaded:', speechSynthesis.getVoices());
         ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       };
 
-      // 某些瀏覽器 getVoices() 可能馬上有值
       if (speechSynthesis.getVoices().length > 0) {
         ['listening', 'reading', 'grammar'].forEach((s) => displayQuestion(s));
       }
     }
 
-    window.onload = initialize;
+    // 頁面 onload：先載入題庫 -> 合併 -> 初始化
+    window.onload = async function () {
+      initConfetti();
+      try {
+        await autoLoadQuestionFiles();
+        mergeQuestionSets();           
+        window.questions = allQuestions; 
+        initialize();
+      } catch (err) {
+        console.error("載入題庫檔案時發生錯誤：", err);
+      }
+    };
   </script>
 </body>
 </html>
